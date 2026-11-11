@@ -435,50 +435,50 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="rel">
-    <div class="sec-head"><h2>本版更新</h2><span class="hint mono">2026.11.10</span></div>
+    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.10</span></div>
     <div class="rel">
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>任务栏工具换了新的</h3>
-          <p>一个托盘小程序同时管居中与透明，右键四项开关随手切；重启资源管理器、插拔显示器后会自动重新对齐，静息占用维持在 3–4 MB，Win7 SP1 到 Win10 19045 都能用。</p>
+          <h3 class="">针对Win7至Win10 任务栏程序图标居中和透明程序重写了独立运行程序YCTB</h3>
+          <p class="">一个托盘小程序同时管居中与透明，右键四项开关随手切；重启资源管理器、插拔显示器后会自动重新对齐，静息占用维持在 3–4 MB，Win7 SP1 到 Win10 19045 都能用。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>右键菜单按目标系统版本给</h3>
-          <p>「任务栏显示所有程序图标」只在真正支持的系统上提供，旧系统不再多写一条点了没反应的菜单。</p>
+          <h3 class="">右键菜单集</h3>
+          <p class="">将部分添加的菜单进行收缩层叠，不再使用全独立菜单按钮。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>不再预设分辨率组合</h3>
-          <p>原来按 1600×900 这类固定组合做占位，换个分辨率就失效。现在改为装机后按实际分辨率自动居中，custom 分辨率也能落到位。</p>
+          <h3 class="">不再固定死显示分辨率下做假居中</h3>
+          <p class="">原来按 1600×900 这类固定组合做占位，目前使用独立YCTB来完成智能适应各种分辨率居中，完全C++不依赖额外运行库、轻快运行低占用。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>随包工具自动就位</h3>
-          <p>工具目录里的程序启动时即同步为当前版本，不必手动替换，也不会出现新旧版本混着用的情况。</p>
+          <h3 class="">所需核心工具内置</h3>
+          <p class="">在用户已有数据发生灾难时，只要程序不被破坏依然随时可用，不会因为缺失工具而导致定制无法进行。</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="sec">
-    <div class="sec-head"><h2>系统支持</h2><span class="hint">按功能分别判定，不按主程序一刀切</span></div>
+    <div class="sec-head"><h2 class="">系统支持</h2><span class="hint">按功能分别判定，不按主程序一刀切</span></div>
     <div class="tbl-wrap">
       <table>
         <colgroup><col style="width:34%"><col style="width:30%"><col style="width:36%"></colgroup>
         <thead><tr><th>功能</th><th>适用范围</th><th>说明</th></tr></thead>
         <tbody>
           <tr><td>主程序与映像处理</td><td class="mono">Win10 / Win11</td><td class="note">需 .NET Framework 4.8；32 位系统同样可运行</td></tr>
-          <tr><td>任务栏图标居中</td><td class="mono">build ≤ 19045</td><td class="note">Win11 任务栏结构不同，不做居中</td></tr>
-          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">关掉即恢复原来的浅色或深色外观</td></tr>
-          <tr><td>进程命令行复制</td><td class="mono">Win7 及以上</td><td class="note">复制系统进程的命令行需要管理员权限</td></tr>
+          <tr><td>任务栏图标居中</td><td class="mono">build ≤ 19045</td><td class="note">仅对Win7到Win10-19045以下系统部署</td></tr>
+          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">同上</td></tr>
+          <tr><td class="">YCDISM核心所需权限和环境</td><td class="mono">Win7 及以上</td><td class="note">能否完全操作取决于用户当前环境和权限要绝对与微软官方文档ADK一致，以免操作会失败，这不是工具所需特权，特此说明。</td></tr>
         </tbody>
       </table>
     </div>
@@ -487,9 +487,7 @@ td.note{color:var(--dim);font-size:13px}
   <section class="sec" id="donors">
     <div class="sec-head"><h2>赞助者名单</h2><span class="hint">感谢每一位让这件事继续做下去的人</span></div>
     <p class="lead" style="font-size:14px;max-width:52em">
-      YCDISM 一直是免费使用的工具。服务器、测试机和正版系统镜像都要花钱，愿意分担一点的朋友，
-      名字会记在这里，不分先后，也不做任何功能上的区分。
-    </p>
+      YCDISM 程序编写、数据整合一直是雨晨独立花费巨量时间、精力及金钱来完成的，毕竟雨晨也是人要生活、除了免费开放的外肯定还是要热心人士、志趣相同以及更多同道者精神、经济、物质上的支持方能走向更远、更开放的未来。</p>
     <div class="dlist">
       <div class="ditem"><span class="dn">忠信科技电脑</span><span class="dq">15271658851</span></div>
       <div class="ditem"><span class="dn">安盾网络</span><span class="dq">360311423</span></div>
@@ -515,12 +513,11 @@ td.note{color:var(--dim);font-size:13px}
     <div class="qrcard">
       <img src="assets/ycdism-qr.png" alt="微信赞赏二维码" width="132" height="131" loading="lazy">
       <div>
-        <h3>想支持这个项目</h3>
-        <p>微信扫码即可，金额随意，完全自愿，不影响任何功能与更新。名单会随时补充，未列上的朋友下次补上；不希望公开称呼的，说一声就撤下。</p>
+        <h3 class="">如果您认可并想帮助雨晨可随意打赏，雨晨真心表示感谢！！！</h3>
+        <p class="">微信扫码即可，金额随意，完全自愿，不影响任何功能与更新。爱心名单会随时补充。</p>
       </div>
     </div>
-    <p class="donor-note">
-      名单按昵称排列，新增的直接加在上面即可。<b>感谢以上朋友的大力支持。</b>
+    <p class="donor-note">以上名单按昵称排列不会先后和赞助额度。<b>感谢以上朋友的大力支持。</b>
     </p>
   </section>
 
@@ -531,16 +528,15 @@ td.note{color:var(--dim);font-size:13px}
         <summary>需要管理员权限吗？<i>＋</i></summary>
         <p>绝大多数映像操作需要。程序启动会申请提权，成功后日志里只保留一个权限状态标记；权限不足时会有明确提示，并说明相关操作可能失败。</p>
       </details>
-      <details>
-        <summary>为什么任务栏工具要单独跑一个 exe？<i>＋</i></summary>
-        <p>居中与透明要一直盯着任务栏的变化（资源管理器重启、图标增减、分辨率调整），放进常驻的小程序里才跟得上。它不依赖运行库，退出后任务栏恢复原样。</p>
+      <details open="" class="">
+        <summary>请至微软官方ADK技术文档做使用前必须满足，非雨晨工具特权。</summary>
       </details>
       <details>
         <summary>会改动当前系统吗？<i>＋</i></summary>
         <p>映像相关操作都在离线挂载的映像里进行，不改本机。只有明确属于本机的设置项（例如任务栏外观、右键菜单）才会写本机注册表，并保留恢复路径。</p>
       </details>
       <details>
-        <summary>打包 ESD / ISO 时为什么还要 GPT 分区信息？<i>＋</i></summary>
+        <summary class="">程序不会改写用户当前系统，仅启动时会获取当前系统有限信息以匹配对应的工具，别无其他。<i>＋</i></summary>
         <p>打包需要知道目标盘的分区与装载分区位置，程序在打包前会搜索可用分区；找不到时不会自行猜测，会提示先装载映像再打包。</p>
       </details>
     </div>
