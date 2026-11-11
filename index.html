@@ -143,12 +143,20 @@ td.note{color:var(--dim);font-size:13px}
 .grp{font-size:12.5px;color:var(--pine);font-weight:600;margin:14px 0 0;letter-spacing:.04em}
 
 /* 捐助者名单 */
-.donors{display:grid;grid-template-columns:1fr;gap:0;margin-top:4px}
-.donor{display:grid;grid-template-columns:132px 1fr;column-gap:16px;align-items:baseline;
-  padding:13px 0;border-top:1px solid var(--line)}
-.donor:first-child{border-top:0}
-.donor .who{font-size:14px;font-weight:600;color:var(--pine)}
-.donor .what{font-size:13.5px;line-height:1.8;color:#3C4A44}
+.dlist{display:grid;grid-template-columns:1fr;margin-top:8px;border-top:1px solid var(--line)}
+.ditem{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--line)}
+.ditem .dn{font-size:14px;font-weight:600;color:var(--pine);min-width:0}
+.ditem .dq{font-size:12.5px;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.qrcard{display:grid;grid-template-columns:1fr;gap:16px;justify-items:start;margin:22px 0 0;
+  padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.qrcard img{display:block;width:132px;height:131px;border-radius:10px}
+.qrcard h3{margin:0 0 6px;font-size:15px;line-height:1.4;color:var(--pine)}
+.qrcard p{margin:0;font-size:13px;line-height:1.9;color:#3C4A44;max-width:34em}
+@media (min-width:720px){
+  .dlist{grid-template-columns:repeat(2,1fr);column-gap:36px}
+  .qrcard{grid-template-columns:auto 1fr;align-items:center;gap:20px}
+}
 .donor-note{font-size:13px;line-height:1.9;color:var(--dim);margin:14px 0 0;max-width:52em}
 .donor-note b{color:var(--pine);font-weight:600}
 
@@ -480,28 +488,42 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="donors">
-    <div class="sec-head"><h2>捐助者名单</h2><span class="hint">感谢为这个工具出过力的人</span></div>
+    <div class="sec-head"><h2>赞助者名单</h2><span class="hint">感谢每一位让这件事继续做下去的人</span></div>
     <p class="lead" style="font-size:14px;max-width:52em">
       YCDISM 一直是免费使用的工具。服务器、测试机和正版系统镜像都要花钱，愿意分担一点的朋友，
-      名字会记在这里，不设门槛，也不做任何功能上的区分。
+      名字会记在这里，不分先后，也不做任何功能上的区分。
     </p>
-    <div class="donors">
-      <div class="donor">
-        <div class="who">待补充</div>
-        <div class="what">第一位捐助者名单位置：把这行的文字改成你的称呼即可。</div>
-      </div>
-      <div class="donor">
-        <div class="who">待补充</div>
-        <div class="what">可以写一句想说的话，也可以只留名字。</div>
-      </div>
-      <div class="donor">
-        <div class="who">待补充</div>
-        <div class="what">名单按时间先后排列，新增的写在最上面。</div>
+    <div class="dlist">
+      <div class="ditem"><span class="dn">忠信科技电脑</span><span class="dq">15271658851</span></div>
+      <div class="ditem"><span class="dn">安盾网络</span><span class="dq">360311423</span></div>
+      <div class="ditem"><span class="dn">傲雪</span><span class="dq">1078172292</span></div>
+      <div class="ditem"><span class="dn">广州-jyt</span><span class="dq">501928599</span></div>
+      <div class="ditem"><span class="dn">IT爱好者</span><span class="dq">3568877894</span></div>
+      <div class="ditem"><span class="dn">浅色丶</span><span class="dq">514728493</span></div>
+      <div class="ditem"><span class="dn">邪性洒脱</span><span class="dq">979951262</span></div>
+      <div class="ditem"><span class="dn">光伏储能、售电、充电桩</span><span class="dq">860298986</span></div>
+      <div class="ditem"><span class="dn">香草布丁/ka</span><span class="dq">9581134</span></div>
+      <div class="ditem"><span class="dn">初意</span><span class="dq">1686818737</span></div>
+      <div class="ditem"><span class="dn">广宁HuangHun</span><span class="dq">934455725</span></div>
+      <div class="ditem"><span class="dn">Mike</span><span class="dq">1634563</span></div>
+      <div class="ditem"><span class="dn">明</span><span class="dq">389580582</span></div>
+      <div class="ditem"><span class="dn">不会游泳的鱼</span><span class="dq">158400686</span></div>
+      <div class="ditem"><span class="dn">同兴华硕</span><span class="dq">122573749</span></div>
+      <div class="ditem"><span class="dn">远瞩</span><span class="dq">569028583</span></div>
+      <div class="ditem"><span class="dn">㜂孞</span><span class="dq">370232617</span></div>
+      <div class="ditem"><span class="dn">mm</span><span class="dq">1524447428</span></div>
+      <div class="ditem"><span class="dn">太行</span><span class="dq">1810253442</span></div>
+      <div class="ditem"><span class="dn">阿辉</span><span class="dq">376031328</span></div>
+    </div>
+    <div class="qrcard">
+      <img src="assets/ycdism-qr.png" alt="微信赞赏二维码" width="132" height="131" loading="lazy">
+      <div>
+        <h3>想支持这个项目</h3>
+        <p>微信扫码即可，金额随意，完全自愿，不影响任何功能与更新。名单会随时补充，未列上的朋友下次补上；不希望公开称呼的，说一声就撤下。</p>
       </div>
     </div>
     <p class="donor-note">
-      想加入名单或改变称呼，直接在这几行文字上改；不希望在公开页面出现的，说一声就撤下。
-      捐助完全自愿，不影响任何功能与更新。<b>感谢每一位愿意让这件事继续做下去的人。</b>
+      名单按昵称排列，新增的直接加在上面即可。<b>感谢以上朋友的大力支持。</b>
     </p>
   </section>
 
