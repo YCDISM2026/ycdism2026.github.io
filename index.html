@@ -135,12 +135,22 @@ td.note{color:var(--dim);font-size:13px}
 .stg-row{display:grid;grid-template-columns:32px 1fr;column-gap:12px;padding:18px 0;border-top:1px solid var(--line)}
 .stg-row:first-child{border-top:0;padding-top:0}
 .stg-row .n{font-size:12px;color:var(--dim);letter-spacing:.1em;padding-top:3px}
-.stg-row h3{font-size:15px;margin:0 0 6px;color:var(--pine)}
+.stg-row h3{font-size:15.5px;font-weight:600;margin:0 0 6px;color:var(--pine)}
 .stg-row p{margin:0;font-size:13.5px;line-height:1.8;color:#31403A;max-width:54em}
 .stg-row p b{color:var(--pine);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
-.chip{font-size:12.5px;line-height:1.6;padding:3px 9px;border:1px solid var(--line);background:var(--paper2);color:#31403A}
-.grp{font-size:12px;color:var(--dim);margin:13px 0 0;letter-spacing:.04em}
+.chip{font-size:12.5px;font-weight:400;line-height:1.6;padding:3px 9px;border:1px solid var(--line);background:var(--paper2);color:#55635D}
+.grp{font-size:12.5px;color:var(--pine);font-weight:600;margin:14px 0 0;letter-spacing:.04em}
+
+/* 捐助者名单 */
+.donors{display:grid;grid-template-columns:1fr;gap:0;margin-top:4px}
+.donor{display:grid;grid-template-columns:132px 1fr;column-gap:16px;align-items:baseline;
+  padding:13px 0;border-top:1px solid var(--line)}
+.donor:first-child{border-top:0}
+.donor .who{font-size:14px;font-weight:600;color:var(--pine)}
+.donor .what{font-size:13.5px;line-height:1.8;color:#3C4A44}
+.donor-note{font-size:13px;line-height:1.9;color:var(--dim);margin:14px 0 0;max-width:52em}
+.donor-note b{color:var(--pine);font-weight:600}
 
 /* FAQ */
 .faq{display:grid;grid-template-columns:1fr;gap:14px}
@@ -194,6 +204,7 @@ td.note{color:var(--dim);font-size:13px}
       <a href="#flow">操作流程</a>
       <a href="#tools">工具集</a>
       <a href="#rel">本版更新</a>
+      <a href="#donors">捐助者</a>
       <a href="#faq">常见问题</a>
       <a href="https://github.com/YCDISM2026" rel="noopener">GitHub</a>
     </div>
@@ -466,6 +477,32 @@ td.note{color:var(--dim);font-size:13px}
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section class="sec" id="donors">
+    <div class="sec-head"><h2>捐助者名单</h2><span class="hint">感谢为这个工具出过力的人</span></div>
+    <p class="lead" style="font-size:14px;max-width:52em">
+      YCDISM 一直是免费使用的工具。服务器、测试机和正版系统镜像都要花钱，愿意分担一点的朋友，
+      名字会记在这里，不设门槛，也不做任何功能上的区分。
+    </p>
+    <div class="donors">
+      <div class="donor">
+        <div class="who">待补充</div>
+        <div class="what">第一位捐助者名单位置：把这行的文字改成你的称呼即可。</div>
+      </div>
+      <div class="donor">
+        <div class="who">待补充</div>
+        <div class="what">可以写一句想说的话，也可以只留名字。</div>
+      </div>
+      <div class="donor">
+        <div class="who">待补充</div>
+        <div class="what">名单按时间先后排列，新增的写在最上面。</div>
+      </div>
+    </div>
+    <p class="donor-note">
+      想加入名单或改变称呼，直接在这几行文字上改；不希望在公开页面出现的，说一声就撤下。
+      捐助完全自愿，不影响任何功能与更新。<b>感谢每一位愿意让这件事继续做下去的人。</b>
+    </p>
   </section>
 
   <section class="sec" id="faq">
