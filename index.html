@@ -115,6 +115,21 @@ td.note{color:var(--dim);font-size:13px}
 .c h3{font-size:14px;margin:0 0 4px;color:var(--pine)}
 .c p{margin:0;font-size:13px;color:#31403A}
 
+/* 前世今生时间轴 */
+.tl{display:block;margin-top:6px}
+.tl-item{display:grid;grid-template-columns:26px 1fr;column-gap:14px;padding-bottom:26px;position:relative}
+.tl-item:last-child{padding-bottom:0}
+.tl-item .axis{position:relative;justify-self:center;width:1px}
+.tl-item .axis::before{content:"";position:absolute;left:50%;top:2px;bottom:-26px;width:1px;background:var(--line);transform:translateX(-50%)}
+.tl-item:last-child .axis::before{display:none}
+.tl-item .axis::after{content:"";position:absolute;left:50%;top:6px;width:9px;height:9px;background:var(--pine);border-radius:50%;transform:translateX(-50%)}
+.tl-item .body{min-width:0}
+.tl-item .yr{display:block;font-size:12px;letter-spacing:.06em;color:var(--dim);margin-bottom:4px}
+.tl-item h3{font-size:14px;margin:0 0 5px;color:var(--pine)}
+.tl-item p{margin:0;font-size:13.5px;line-height:1.7;color:#31403A;max-width:52em}
+.tl-lead{font-size:15px;line-height:1.85;color:#25332E;max-width:46em;margin:0 0 26px}
+.tl-lead em{font-style:normal;color:var(--accent)}
+
 /* FAQ */
 .faq{display:grid;grid-template-columns:1fr;gap:14px}
 .faq details{border-top:1px solid var(--line);padding-top:12px}
@@ -163,6 +178,8 @@ td.note{color:var(--dim);font-size:13px}
     </div>
     <div class="topacts">
       <span class="ver mono">NT10X</span>
+      <a href="#intro">前世今生</a>
+      <a href="#flow">操作流程</a>
       <a href="#tools">工具集</a>
       <a href="#rel">本版更新</a>
       <a href="#faq">常见问题</a>
@@ -179,7 +196,7 @@ td.note{color:var(--dim);font-size:13px}
         <h1>YCDISM</h1>
         <p class="lead" style="margin-top:22px">
           Windows 映像的装载、精简与优化一体化工具。GUI 覆盖常规操作，命令行能力全部保留，
-          内嵌工具集<em>脱离原始目录也能独立运行</em>。
+          随包工具<em>自带一份，整目录拷走也能直接跑</em>。
         </p>
         <div class="cta">
           <button class="btn" id="dl-btn" type="button">下载安装包</button>
@@ -189,8 +206,58 @@ td.note{color:var(--dim);font-size:13px}
       </div>
       <div class="hero-side">
         <div class="stat"><b class="mono">13.1 MB</b><span>主程序单文件，x86 / x64 通用</span></div>
-        <div class="stat"><b class="mono">52</b><span>内嵌载荷条目，启动按需释放</span></div>
+        <div class="stat"><b class="mono">52</b><span>随包工具与脚本，开箱即用</span></div>
         <div class="stat"><b class="mono">NT10X</b><span>面向 Win10 / Win11 映像制作</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="intro">
+    <div class="sec-head"><h2>前世今生</h2><span class="hint">从手工摸系统，到 ADK 全流程</span></div>
+    <p class="tl-lead">
+      YCDISM 是雨晨 CMD 版本程序<em>功能与互动</em>的一次升华。多年手工做映像攒下来的判断，被写进了图形化的流程里：能交给程序判断的地方程序替你判断，需要人拍板的地方仍然交回给你。
+      所有能力都建立在与 <em>ADK 技术的深度融合</em>之上——按微软官方规范与流程执行，再把手工经验叠在规范之上，对装载好的映像做定制、增强、精简、优化与个性设置，让"定制"这件事真正落地。
+    </p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="axis"></div>
+        <div class="body">
+          <span class="yr">经验起点 · Windows ME / 98</span>
+          <h3>先把系统拆明白</h3>
+          <p>从这两个系统开始反复重装、比对、替换，看清组件、补丁与文件之间的对应关系。这些靠手工试出来的判断，后来成了程序里的默认值。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="axis"></div>
+        <div class="body">
+          <span class="yr">程序起点 · Windows XP</span>
+          <h3>YCDISM 的前身诞生</h3>
+          <p>核心操作基于 imagex.exe，第一次把原本零散的命令行串成一套可复用的流程，映像制作从"每次重新摸"变成"照着走"。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="axis"></div>
+        <div class="body">
+          <span class="yr">过渡 · Windows Vista</span>
+          <h3>跟着系统换代</h3>
+          <p>镜像格式与部署方式换代，工具链一边追系统，一边把处理链路补齐，为后来的完整形态打底。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="axis"></div>
+        <div class="body">
+          <span class="yr">成形 · Windows 7</span>
+          <h3>初具完整状态</h3>
+          <p>装载、精简、优化、打包基本成形，CMD 版本已经能独立跑完一整套制作流程，这也是后来 GUI 版本对照的底本。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="axis"></div>
+        <div class="body">
+          <span class="yr">2026 · 自 Windows 8 起</span>
+          <h3>全面转入 ADK</h3>
+          <p>所有核心操作改由 ADK 的 dism.exe 完成，遵照官方规范与流程，把官方的横向、纵向与多层级能力结合起来，叠加多年手工经验，对装载映像做定制、增强、精简、优化与个性设置。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -200,21 +267,73 @@ td.note{color:var(--dim);font-size:13px}
     <div class="facts">
       <div>
         <h3>装载与卸载</h3>
-        <p>识别并行位置的映像并装载，处理完再卸载回写；启动阶段先清理上次中断残留和过时的挂载数据，避免带着脏挂载继续干活。</p>
+        <p>选好并行位置里的映像，点一下装载就能开始干活；日志会给出挂载路径，处理完再卸载回写。中途退出留下的挂载，下次启动会先清干净，不会带着脏数据继续。</p>
       </div>
       <div>
         <h3>精简与组件处理</h3>
-        <p>自选卸载组件、特殊处理组件、Winsxs 精简、NetFx3 离线安装、LCU / FOD / PSF 补丁解析，按 build 版本决定可用范围。</p>
+        <p>自选卸载组件、特殊处理组件、Winsxs 精简、NetFx3 离线安装、LCU / FOD / PSF 补丁，按清单勾选执行；能选什么由目标系统的版本决定，界面上不会出现用不了的选项。</p>
       </div>
       <div>
         <h3>优化与个性化</h3>
-        <p>通用优化单项选择、右键菜单增补、文件关联修正、任务栏布局与外观设置，全部按目标机生效而不改动当前系统。</p>
+        <p>通用优化单项选择逐条勾选，右键菜单、文件关联、任务栏图标居中与透明按需开启；这些设置只对目标机生效，不回头改动你正在用的这台电脑。</p>
       </div>
     </div>
   </section>
 
+  <section class="sec" id="flow">
+    <div class="sec-head"><h2>操作流程</h2><span class="hint">每个功能从哪进、要做什么、看什么结果</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <colgroup><col style="width:22%"><col style="width:48%"><col style="width:30%"></colgroup>
+        <thead><tr><th>功能</th><th>怎么操作</th><th>结果</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>装载映像</td>
+            <td>在映像列表里选定目标和并行位置，执行装载；日志里出现挂载路径即成功。</td>
+            <td class="note">映像进入可编辑状态，后续所有处理都作用在挂载目录上</td>
+          </tr>
+          <tr>
+            <td>自选卸载组件 / 特殊处理组件</td>
+            <td>进入对应清单逐项勾选，确认后执行；不确定的项先跳过，可分批多次处理。</td>
+            <td class="note">目标组件被移除，未勾选的保持原样</td>
+          </tr>
+          <tr>
+            <td>补丁与功能</td>
+            <td>LCU / FOD / PSF 补丁与 NetFx3 离线安装各自有独立入口，选好补丁文件或目录后执行。</td>
+            <td class="note">补丁并入映像，离线环境下无需联网</td>
+          </tr>
+          <tr>
+            <td>通用优化单项选择</td>
+            <td>对话框内按条目勾选需要的优化项，可全选也可只挑几条，确认后一次性写入。</td>
+            <td class="note">优化项按目标机生效，卸载映像不改本机</td>
+          </tr>
+          <tr>
+            <td>右键菜单 / 文件关联</td>
+            <td>选择要增补或修正的菜单项与关联方式后执行；按目标系统版本自动过滤不可用项。</td>
+            <td class="note">装机后右键菜单与文件打开方式按设置生效</td>
+          </tr>
+          <tr>
+            <td>任务栏居中与透明</td>
+            <td>处理时勾选相应选项，装机后由随包的 YCTB 在托盘接管；托盘右键可单独开关居中、透明、开机自启。</td>
+            <td class="note">按目标机实际分辨率自动居中；透明关掉即恢复原外观</td>
+          </tr>
+          <tr>
+            <td>打包 ESD / ISO</td>
+            <td>处理完毕先卸载，再选打包格式与输出位置执行；打包前程序会自行寻找可用的装载分区。</td>
+            <td class="note">输出可直接分发的 ESD 或 ISO</td>
+          </tr>
+          <tr>
+            <td>进程命令行复制</td>
+            <td>YCPS 里在任意进程上右键，选择复制命令行，内容直接进剪贴板。</td>
+            <td class="note">排查启动参数、写脚本时直接粘贴使用</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section class="sec" id="tools">
-    <div class="sec-head"><h2>随包工具</h2><span class="hint">TOOL 目录下的程序启动时强制覆盖为程序版本</span></div>
+    <div class="sec-head"><h2>随包工具</h2><span class="hint">随主程序就位，无需另行安装</span></div>
     <div class="tbl-wrap">
       <table>
         <colgroup>
@@ -286,29 +405,29 @@ td.note{color:var(--dim);font-size:13px}
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>任务栏工具改为原生 x86</h3>
-          <p>YCTB 由托管版重写为零依赖原生程序：居中用运行时平移图标层实现，透明走 accent 接口，托盘为全透明占位图标但保留右键菜单；静息内存 3.7 MB 左右，覆盖 Win7 SP1 至 Win10 19045。</p>
+          <h3>任务栏工具换了新的</h3>
+          <p>一个托盘小程序同时管居中与透明，右键四项开关随手切；重启资源管理器、插拔显示器后会自动重新对齐，静息占用维持在 3–4 MB，Win7 SP1 到 Win10 19045 都能用。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>右键菜单门控按真实 build 判定</h3>
-          <p>「任务栏显示所有程序图标」改为按 CBSVR ≥ 26100 写入，避免归并后的档位变量与真实 build 混用导致在旧系统上多写一条无效菜单。</p>
+          <h3>右键菜单按目标系统版本给</h3>
+          <p>「任务栏显示所有程序图标」只在真正支持的系统上提供，旧系统不再多写一条点了没反应的菜单。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>固定分辨率居中流移除</h3>
-          <p>原先按 1600×900 等固定组合创建空白工具栏占位，遇到自定义分辨率就失效。现已删除该目录与数据，改由 YCTB 在目标机运行时按实际分辨率自动居中。</p>
+          <h3>不再预设分辨率组合</h3>
+          <p>原来按 1600×900 这类固定组合做占位，换个分辨率就失效。现在改为装机后按实际分辨率自动居中，custom 分辨率也能落到位。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3>载荷与部署一致性</h3>
-          <p>内嵌载荷中的 TOOL 程序在启动时一律强制覆盖为程序版本，避免旧 exe、旧 DLL 残留导致的版本错配。</p>
+          <h3>随包工具自动就位</h3>
+          <p>工具目录里的程序启动时即同步为当前版本，不必手动替换，也不会出现新旧版本混着用的情况。</p>
         </div>
       </div>
     </div>
@@ -321,10 +440,10 @@ td.note{color:var(--dim);font-size:13px}
         <colgroup><col style="width:34%"><col style="width:30%"><col style="width:36%"></colgroup>
         <thead><tr><th>功能</th><th>适用范围</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>主程序与映像处理</td><td class="mono">Win10 / Win11</td><td class="note">.NET Framework 4.8，x86 宿主亦可运行</td></tr>
-          <tr><td>任务栏图标居中</td><td class="mono">build ≤ 19045</td><td class="note">Win11 任务栏结构不同，不做处理</td></tr>
-          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">走系统 accent 接口，关闭时补发主题变更消息恢复原色</td></tr>
-          <tr><td>进程命令行复制</td><td class="mono">Win7 及以上</td><td class="note">系统进程需管理员权限才能读命令行</td></tr>
+          <tr><td>主程序与映像处理</td><td class="mono">Win10 / Win11</td><td class="note">需 .NET Framework 4.8；32 位系统同样可运行</td></tr>
+          <tr><td>任务栏图标居中</td><td class="mono">build ≤ 19045</td><td class="note">Win11 任务栏结构不同，不做居中</td></tr>
+          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">关掉即恢复原来的浅色或深色外观</td></tr>
+          <tr><td>进程命令行复制</td><td class="mono">Win7 及以上</td><td class="note">复制系统进程的命令行需要管理员权限</td></tr>
         </tbody>
       </table>
     </div>
@@ -339,7 +458,7 @@ td.note{color:var(--dim);font-size:13px}
       </details>
       <details>
         <summary>为什么任务栏工具要单独跑一个 exe？<i>＋</i></summary>
-        <p>居中与透明都要常驻监听任务栏变化（explorer 重启、图标增减），放进常驻进程里才能跟着走。它是零依赖原生程序，不占运行库，退出即恢复任务栏原状。</p>
+        <p>居中与透明要一直盯着任务栏的变化（资源管理器重启、图标增减、分辨率调整），放进常驻的小程序里才跟得上。它不依赖运行库，退出后任务栏恢复原样。</p>
       </details>
       <details>
         <summary>会改动当前系统吗？<i>＋</i></summary>
