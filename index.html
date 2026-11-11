@@ -130,6 +130,18 @@ td.note{color:var(--dim);font-size:13px}
 .tl-lead{font-size:15px;line-height:1.85;color:#25332E;max-width:46em;margin:0 0 26px}
 .tl-lead em{font-style:normal;color:var(--accent)}
 
+/* 操作流程分段 */
+.stg{display:block}
+.stg-row{display:grid;grid-template-columns:32px 1fr;column-gap:12px;padding:18px 0;border-top:1px solid var(--line)}
+.stg-row:first-child{border-top:0;padding-top:0}
+.stg-row .n{font-size:12px;color:var(--dim);letter-spacing:.1em;padding-top:3px}
+.stg-row h3{font-size:15px;margin:0 0 6px;color:var(--pine)}
+.stg-row p{margin:0;font-size:13.5px;line-height:1.8;color:#31403A;max-width:54em}
+.stg-row p b{color:var(--pine);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+.chip{font-size:12.5px;line-height:1.6;padding:3px 9px;border:1px solid var(--line);background:var(--paper2);color:#31403A}
+.grp{font-size:12px;color:var(--dim);margin:13px 0 0;letter-spacing:.04em}
+
 /* FAQ */
 .faq{display:grid;grid-template-columns:1fr;gap:14px}
 .faq details{border-top:1px solid var(--line);padding-top:12px}
@@ -254,7 +266,7 @@ td.note{color:var(--dim);font-size:13px}
       <div class="tl-item">
         <div class="axis"></div>
         <div class="body">
-          <span class="yr">2026 · 自 Windows 8 起</span>
+          <span class="yr">自 Windows 8 起</span>
           <h3>全面转入 ADK</h3>
           <p>所有核心操作改由 ADK 的 dism.exe 完成，遵照官方规范与流程，把官方的横向、纵向与多层级能力结合起来，叠加多年手工经验，对装载映像做定制、增强、精简、优化与个性设置。</p>
         </div>
@@ -281,54 +293,61 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="flow">
-    <div class="sec-head"><h2>操作流程</h2><span class="hint">每个功能从哪进、要做什么、看什么结果</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <colgroup><col style="width:22%"><col style="width:48%"><col style="width:30%"></colgroup>
-        <thead><tr><th>功能</th><th>怎么操作</th><th>结果</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>装载映像</td>
-            <td>在映像列表里选定目标和并行位置，执行装载；日志里出现挂载路径即成功。</td>
-            <td class="note">映像进入可编辑状态，后续所有处理都作用在挂载目录上</td>
-          </tr>
-          <tr>
-            <td>自选卸载组件 / 特殊处理组件</td>
-            <td>进入对应清单逐项勾选，确认后执行；不确定的项先跳过，可分批多次处理。</td>
-            <td class="note">目标组件被移除，未勾选的保持原样</td>
-          </tr>
-          <tr>
-            <td>补丁与功能</td>
-            <td>LCU / FOD / PSF 补丁与 NetFx3 离线安装各自有独立入口，选好补丁文件或目录后执行。</td>
-            <td class="note">补丁并入映像，离线环境下无需联网</td>
-          </tr>
-          <tr>
-            <td>通用优化单项选择</td>
-            <td>对话框内按条目勾选需要的优化项，可全选也可只挑几条，确认后一次性写入。</td>
-            <td class="note">优化项按目标机生效，卸载映像不改本机</td>
-          </tr>
-          <tr>
-            <td>右键菜单 / 文件关联</td>
-            <td>选择要增补或修正的菜单项与关联方式后执行；按目标系统版本自动过滤不可用项。</td>
-            <td class="note">装机后右键菜单与文件打开方式按设置生效</td>
-          </tr>
-          <tr>
-            <td>任务栏居中与透明</td>
-            <td>处理时勾选相应选项，装机后由随包的 YCTB 在托盘接管；托盘右键可单独开关居中、透明、开机自启。</td>
-            <td class="note">按目标机实际分辨率自动居中；透明关掉即恢复原外观</td>
-          </tr>
-          <tr>
-            <td>打包 ESD / ISO</td>
-            <td>处理完毕先卸载，再选打包格式与输出位置执行；打包前程序会自行寻找可用的装载分区。</td>
-            <td class="note">输出可直接分发的 ESD 或 ISO</td>
-          </tr>
-          <tr>
-            <td>进程命令行复制</td>
-            <td>YCPS 里在任意进程上右键，选择复制命令行，内容直接进剪贴板。</td>
-            <td class="note">排查启动参数、写脚本时直接粘贴使用</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="sec-head"><h2>操作流程</h2><span class="hint">选择 → 装载 → 中间三十项功能 → 扫尾退出</span></div>
+    <div class="stg">
+      <div class="stg-row">
+        <span class="n mono">01</span>
+        <div>
+          <h3>选择 ISO 或映像</h3>
+          <div class="chips">
+            <span class="chip">选择 ISO 或映像</span><span class="chip">选择或装载映像</span>
+          </div>
+        </div>
+      </div>
+      <div class="stg-row">
+        <span class="n mono">02</span>
+        <div>
+          <h3>装载</h3>
+          <div class="chips">
+            <span class="chip">装载映像</span>
+          </div>
+        </div>
+      </div>
+      <div class="stg-row">
+        <span class="n mono">03</span>
+        <div>
+          <h3>中间的三十项子菜单功能</h3>
+          <p class="grp">组件与应用</p>
+          <div class="chips">
+            <span class="chip">卸载或安装 APPx</span><span class="chip">更新添加 APPx 应用</span><span class="chip">移除可选功能</span><span class="chip">启用或关闭功能</span><span class="chip">卸载 Cortana</span><span class="chip">精简 SystemAppx</span><span class="chip">添加或恢复小程序</span><span class="chip">移除 OneDrive</span><span class="chip">移除杀毒 WD 数据</span>
+          </div>
+          <p class="grp">精简与清理</p>
+          <div class="chips">
+            <span class="chip">自选移除卸载组件</span><span class="chip">特殊处理组件</span><span class="chip">WinSxS 库精简</span><span class="chip">制作提取组件封包</span><span class="chip">精简 Assembly</span><span class="chip">精简 Font 字体</span><span class="chip">清理压缩映像存储</span><span class="chip">精简或集成 Edge</span>
+          </div>
+          <p class="grp">补丁、运行库与驱动</p>
+          <div class="chips">
+            <span class="chip">集成补丁或功能包</span><span class="chip">整合 VC / NET48 / DX9</span><span class="chip">安装已知设备驱动</span><span class="chip">卸载非内置驱动</span>
+          </div>
+          <p class="grp">优化与个性化</p>
+          <div class="chips">
+            <span class="chip">个性通用优化设置</span><span class="chip">添加通用无人值守</span><span class="chip">低版本加组策略</span><span class="chip">自助集成安装密钥</span><span class="chip">替换美化主题图标</span><span class="chip">关闭虚拟内存</span><span class="chip">禁止更新及相关</span><span class="chip">提升装载映像版本</span>
+          </div>
+          <p class="grp">其它</p>
+          <div class="chips">
+            <span class="chip">去 PShell 右键菜单</span>
+          </div>
+        </div>
+      </div>
+      <div class="stg-row">
+        <span class="n mono">04</span>
+        <div>
+          <h3>扫尾退出</h3>
+          <div class="chips">
+            <span class="chip">保存已改变的映像</span><span class="chip">增量保存装载映像</span><span class="chip">自选卸载映像</span><span class="chip">重命名或输出</span><span class="chip">打包 ESD 或 ISO</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
