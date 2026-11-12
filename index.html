@@ -81,6 +81,11 @@ body{
 .decl{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.75;color:var(--dim);max-width:60em}
 .decl strong{display:inline-block;margin-right:8px;color:var(--pine);font-weight:600}
 
+/* 实机界面 */
+.shot{margin:0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);background:var(--paper2)}
+.shot figcaption{margin-top:10px;font-size:12.5px;color:var(--dim);line-height:1.7}
+
 /* —— 通用段落 —— */
 .sec{padding:38px 0;border-bottom:1px solid var(--line)}
 .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
@@ -224,26 +229,34 @@ td.note{color:var(--dim);font-size:13px}
       <div class="">
         <p class="tag mono">WINDOWS IMAGE STUDIO · 雨晨绿软</p>
         <h1>YCDISM</h1>
-        <p class="lead" style="margin-top:22px">YCDISM是Windows 映像装载定制、增强、精简、优化、自定义设置一体化完全离线装载制作工具、基本实现在部署前完成目标系统的一切控制和定制功能。
+        <p class="lead" style="margin-top:22px">YCDISM是Windows 映像装载定制、增强、精简、优化、自定义设置一体化完全离线装载制作工具、基本实现在部署前完成目标系统的一切个性设置和定制功能。
         </p>
         <div class="cta">
           <button class="btn" id="dl-btn" type="button">获取YCDISM</button>
           <a class="btn ghost" href="#tools">附属工具</a>
         </div>
-        <p class="dl-note" id="dl-note">安装包还在打包，暂未开放下载；页面先做静态展示，开放后此处直接给直链。</p>
+        <p class="dl-note" id="dl-note">正式版程序仍在不断增强，若感兴趣请持续关注，一有公测会第一时间在此提供直链</p>
       </div>
       <div class="hero-side">
-        <div class="stat"><b class="mono">12.5 MB</b><span>主程序单文件，x86 / x64 通用</span></div>
-        <div class="stat"><b class="mono">52</b><span>随包工具与脚本，开箱即用</span></div>
+        <div class="stat"><b class="mono">8.08 MB</b><span>主程序单文件，x86 / x64 通用</span></div>
+        <div class="stat"><b class="mono">52</b><span class="">核心所需工具内嵌</span></div>
         <div class="stat"><b class="mono">NT10X</b><b class="mono">理论上支持Win7至最新Win11-29xxx系统</b><span>面向 Win10 / Win11 映像制作</span></div>
       </div>
     </div>
   </section>
 
+  <section class="sec" id="shot">
+    <div class="sec-head"><h2>实机界面</h2><span class="hint">顶上两行信息，中间三十六项功能，下面是运行日志</span></div>
+    <figure class="shot">
+      <img src="assets/YCDISM_V5.jpg" alt="YCDISM 2026 公测版 V5 主界面" width="1000" height="740" loading="lazy">
+      <figcaption>第一行是当前系统，第二行是已装载的映像，架构、语言、安装时间、版本都随映像走；功能按组件与应用、精简与清理、补丁与运行库、优化与个性化分组，已在本次加载里用过的项会标勾；底部日志逐条给出进度与耗时，结束时汇总成功、失败数量。</figcaption>
+    </figure>
+  </section>
+
   <section class="sec" id="intro">
     <div class="sec-head"><h2>前世今生</h2><span class="hint">从手工摸系统，到 ADK 全流程</span></div>
     <p class="tl-lead">
-      YCDISM 是雨晨 CMD 版程序<em>功能与互动性质上的</em>一次升华。依据20多年手动和程序化制作及海量测试沉淀之后的积累：程序判断，最后决定权仍交给用户决断。
+      YCDISM 是雨晨 CMD 版程序<em>功能与互动性质上的</em>一次升华。依据20多年手动和程序化制作及海量测试沉淀之后的积累：程序智能判断，最后决定权仍交给用户决断。
       所有能力都建立在与 <em>ADK 技术的深度融合</em>——按微软ADK官方文档规范与流程执行，再把经验叠在规范之内，通过横向、纵向、多层级、多维度整合对装载映像做定制、增强、精简、优化与自定义设置，从而轻轻松松完成定制工作。
     </p>
     <div class="tl">
@@ -397,46 +410,68 @@ td.note{color:var(--dim);font-size:13px}
             <td class="note">随宿主位数取</td>
           </tr>
           <tr>
-            <td class="mono"><br></td>
-            <td>WIM 读写、导出、应用与信息查看</td>
+            <td class="mono">YCPack.exe</td>
+            <td>重命名/输出纯净映像、打包 ESD/ISO 与 ESD 加解密（内置实现，已取代原 ESDdecrypt.exe）</td>
+            <td class="mono">AnyCPU</td>
+            <td class="note">不随包常驻；内嵌于程序，用到时才释放到 TOOL，仅限 YCDISM.exe 调用</td>
+          </tr>
+          <tr>
+            <td class="mono">TOAC.exe</td>
+            <td>接管文件与目录所有权，供卸载脚本在映像里替换受保护文件</td>
+            <td class="mono">x86</td>
+            <td class="note">零依赖原生</td>
+          </tr>
+          <tr>
+            <td class="mono">SxSExpand.exe</td>
+            <td>解开 DCM / PA30 压缩的 SxS 清单，供组件提取与补丁解析读取</td>
+            <td class="mono">x86</td>
+            <td class="note">压缩清单专用</td>
+          </tr>
+          <tr>
+            <td class="mono">aria2c.exe</td>
+            <td>补丁、语言包等多线程下载</td>
             <td class="mono">x86 / x64</td>
-            <td class="note">需同目录 libwim-15.dll</td>
-          </tr>
-          <tr>
-            <td class="mono"><br></td>
-            <td>归档解包、资源包处理</td>
-            <td class="mono">x86 / x64</td>
-            <td class="note">按宿主位数取</td>
-          </tr>
-          <tr>
-            <td class="mono"><br></td>
-            <td>PSF 补丁解包，配合 cabarc / SxSExpand 使用</td>
-            <td class="mono">x86</td>
-            <td class="note">工具链自足</td>
-          </tr>
-          <tr>
-            <td class="mono"><br></td>
-            <td>PE 资源查看与替换</td>
-            <td class="mono">x86</td>
-            <td class="note">含脚本与配置</td>
-          </tr>
-          <tr class="">
-            <td class="mono"><br></td>
-            <td>ESD 解密，供后续转换使用</td>
-            <td class="mono">x86</td>
-            <td class="note">工具链自足</td>
+            <td class="note">需网络</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="decl">
-      <p class=""><strong>版权声明</strong>随包工具若有第三方程序 ，均来自网络公开渠道，版权归各原作者所有，本项目仅作集成与分发，不作售卖。若权利人认为收录不妥、希望下架，可通过页脚 QQ 或仓库 Issue 联系，核实后第一时间移除。</p>
+      <p><strong>版权声明</strong>随包工具中的第三方程序（如 aria2c、SxSExpand 等）均来自网络公开渠道，版权归各原作者所有，本项目仅作集成与分发，不作售卖。WIM／ESD 读写、PSF 解码、CAB 与压缩包处理等已改为程序内置实现或系统自带工具，不再随包分发对应的第三方程序。若权利人认为收录不妥、希望下架，可通过页脚 QQ 或仓库 Issue 联系，核实后第一时间移除。</p>
     </div>
   </section>
 
   <section class="sec" id="rel">
-    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.10</span></div>
+    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.12</span></div>
     <div class="rel">
+      <div class="rel-row">
+        <div class="d mono">11.12</div>
+        <div class="c">
+          <h3 class="">制作提取组件封包按官方结构完整导出</h3>
+          <p class="">以包族的 mum 为起点，顺着 dependency/dependentAssembly 与 package/update/package 两条引用逐层并入组件清单、子包与载荷；母包里查不到清单身份的引用按组件处理，n\、f\、r 三类备份副本一并收进，宁多不少。导出的 CAB 结构与官方特征包一致，可直接交 DISM 安装。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.12</div>
+        <div class="c">
+          <h3 class="">补丁解析覆盖 PSF / CAB / WIM 组合</h3>
+          <p class="">WIM 基线先展开，再按包内 cix.xml 打 PSF 差量，最后封装成 ESD；PSF 解码改用内置 msdelta 直连，不再调用外置工具；映像是 x86 还是 x64 由补丁名第三段判定，不符合直接提示。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.12</div>
+        <div class="c">
+          <h3 class="">精简或集成 Edge 增加「捕获当前系统 Edge 映像」</h3>
+          <p class="">安装目录按宿主位数与系统盘自动定位，版本号取真实文件版本，捕获成 Edge.wim，已存在时询问覆盖、追加还是取消；捕获项不要求先装载映像。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.12</div>
+        <div class="c">
+          <h3 class="">版本特征包成对排除</h3>
+          <p class="">Microsoft-Windows-EnterpriseSEdition 与它的 -Wrapper 同时存在时，才从组件清单里剔除，避免把不相干的中性包一起排掉。</p>
+        </div>
+      </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
