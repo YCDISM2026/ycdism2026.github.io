@@ -231,7 +231,7 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="shot">
-    <div class="sec-head"><h2>主界面示意</h2><span class="hint">上方为当前系统与当前装载信息，中部为功能菜单，下方为运行日志</span></div>
+    <div class="sec-head"><h2>主界面示意</h2><span class="hint">上方为当前系统与当前装载信息，中部为功能菜单，下方为运行日志，黄色标识代表仅供极限精简爱好者专用选项。</span></div>
     <figure class="shot">
       <img src="YCDISM.png" alt="YCDISM 2026 公测版 V6 主界面" loading="lazy">
       <figcaption>第一行是当前系统，第二行是已装载的映像，架构、语言、版本都随映像走；功能按处理阶段分组，本轮已执行过的项会在界面上标记；底部日志逐条给出进度与结果，结束时汇总成功与失败情况。</figcaption>
@@ -307,7 +307,7 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="menus">
-    <div class="sec-head"><h2>功能菜单</h2><span class="hint">按一级菜单分组列出子菜单与处理流程，不含具体操作命令与实现细节</span></div>
+    <div class="sec-head"><h2>功能菜单</h2><span class="hint">按一级菜单分组列出子菜单</span></div>
     <div class="groups">
 
       <div class="group">
@@ -575,20 +575,20 @@ td.note{color:var(--dim);font-size:13px}
   <section class="sec" id="faq">
     <div class="sec-head"><h2>常见问题</h2></div>
     <div class="faq">
-      <details open="">
-        <summary class="">需要管理员权限吗？<i>＋</i></summary>
+      <details>
+        <summary>需要管理员权限吗？<i>＋</i></summary>
         <p>绝大多数映像操作需要。程序启动会申请提权，成功后日志里只保留一个权限状态标记；权限不足时会有明确提示，并说明相关操作可能失败。</p>
       </details>
-      <details open="">
-        <summary class="">使用前需要满足什么环境？<i>＋</i></summary>
+      <details>
+        <summary>使用前需要满足什么环境？<i>＋</i></summary>
         <p>使用前请对照官方技术文档确认环境与权限要求，这属于官方规范要求，并非本工具额外索取的特权。</p>
       </details>
-      <details open="">
-        <summary class="">会改动当前系统吗？<i>＋</i></summary>
+      <details>
+        <summary>会改动当前系统吗？<i>＋</i></summary>
         <p>映像相关操作都在离线装载的映像里进行，不改本机。只有明确属于本机的设置项（例如任务栏外观、右键菜单）才会写本机，并保留恢复路径。</p>
       </details>
-      <details open="">
-        <summary class="">程序会读取本机信息吗？<i>＋</i></summary>
+      <details>
+        <summary>程序会读取本机信息吗？<i>＋</i></summary>
         <p>程序不会改写用户当前系统，仅在启动时获取有限信息以匹配对应的工具。打包前会搜索可用分区；找不到时不会自行猜测，会提示先装载映像再打包。</p>
       </details>
     </div>
@@ -654,6 +654,7 @@ td.note{color:var(--dim);font-size:13px}
   });
 })();
 </script>
+
 
 
 
