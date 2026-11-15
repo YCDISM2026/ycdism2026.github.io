@@ -2,122 +2,89 @@
 <html lang="zh-CN"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YCDISM 2026 — Windows 映像制作工具</title>
-<meta name="description" content="YCDISM 2026 是面向 NT10X 的 Windows 映像装载、精简与优化工具，内置工具集可脱离原目录独立运行。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231F473F'/%3E%3Cpath d='M7 10h18v3H7zM7 16h12v3H7zM7 22h7v3H7z' fill='%23F2F4F1'/%3E%3C/svg%3E">
+<title>YCDISM 2026 — Windows 映像制作程序</title>
+<meta name="description" content="YCDISM 2026 是面向 Windows 10/11 的映像装载、定制、精简与优化制作程序，按菜单流程完成离线映像定制与成品输出。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232B7DE6'/%3E%3Ctext x='16' y='21' font-family='Microsoft YaHei UI,sans-serif' font-size='14' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EYC%3C/text%3E%3C/svg%3E">
 <style>
 :root{
-  --paper:#F2F4F1;
-  --paper2:#E7EBE6;
-  --ink:#16211E;
-  --pine:#1F473F;
-  --dim:#5B6B64;
-  --line:#C6D0C8;
-  --accent:#BE4526;
+  --bg:#F3F6FB;
+  --card:#FFFFFF;
+  --border:#E1E7F0;
+  --accent:#2B7DE6;
+  --accent-hover:#1B62C5;
+  --accent-soft:#E9F2FF;
+  --text:#1F2937;
+  --dim:#6B7280;
+  --ok:#2E8D4A;
+  --warn:#F29922;
+  --line:#E1E7F0;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
-  font-size:16px;
-  line-height:1.65;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.7;
 }
-.mono{font-family:Consolas,"Cascadia Mono","SFMono-Regular",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.mono{font-family:Consolas,"Cascadia Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 
-/* —— 顶栏 —— */
-.topbar{
-  border-bottom:1px solid var(--line);
-  background:var(--paper);
-  position:sticky;top:0;z-index:20;
-}
-.topbar-in{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:12px 0;flex-wrap:wrap;
-}
+/* 顶栏 */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(243,246,251,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 0}
 .brand{display:flex;align-items:baseline;gap:10px;min-width:0}
-.brand b{font-size:17px;letter-spacing:.06em}
-.brand span{font-size:12px;color:var(--dim);white-space:nowrap}
+.brand b{font-size:17px;letter-spacing:.04em}
+.brand .ver{font-size:12px;color:var(--dim)}
 .topacts{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.topacts a{color:var(--pine);text-decoration:none;font-size:13px;border-bottom:1px solid transparent;padding-bottom:2px}
-.topacts a:hover{border-color:var(--pine)}
-.ver{font-size:12px;color:var(--dim)}
+.topacts a{color:var(--text);text-decoration:none;font-size:13px;border-bottom:1px solid transparent;padding-bottom:2px}
+.topacts a:hover{color:var(--accent);border-color:var(--accent)}
 
-/* —— 首屏 —— */
-.hero{padding:40px 0 34px;border-bottom:1px solid var(--line)}
+/* 首屏 */
+.hero{padding:46px 0 34px}
 .hero-grid{display:grid;gap:26px}
-.hero h1{
-  font-size:clamp(44px,12vw,116px);
-  line-height:.92;
-  letter-spacing:-.02em;
-  margin:0;
-  font-weight:700;
-  color:var(--pine);
-}
-.hero .tag{font-size:13px;letter-spacing:.16em;color:var(--dim);margin:0 0 14px}
-.hero p.lead{
-  margin:0;font-size:17px;max-width:38em;color:#25332E;
-}
-.hero p.lead em{font-style:normal;color:var(--accent)}
-.hero-side{display:flex;flex-direction:column;gap:14px;border-left:2px solid var(--pine);padding-left:16px}
+.hero h1{margin:0 0 10px;font-size:clamp(34px,7vw,52px);line-height:1.1;letter-spacing:-.01em;font-weight:700}
+.hero .tag{font-size:12.5px;letter-spacing:.16em;color:var(--dim);margin:0 0 14px}
+.hero .sub{margin:0 0 16px;font-size:15px;color:var(--dim)}
+.hero .lead{margin:0;max-width:44em;font-size:16px;color:#25303D}
+.hero-side{display:flex;flex-direction:column;gap:14px;border-left:2px solid var(--accent-soft);padding-left:16px}
 .stat{display:flex;flex-direction:column;gap:2px}
-.stat b{font-size:20px;letter-spacing:.01em}
+.stat b{font-size:20px;letter-spacing:.01em;color:var(--text)}
 .stat span{font-size:12px;color:var(--dim)}
-.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:44px;padding:0 18px;font-size:14px;
-  border:1px solid var(--pine);background:var(--pine);color:var(--paper);
-  text-decoration:none;cursor:pointer;
-  font-family:inherit;
-}
-.btn:hover{background:#17352F;border-color:#17352F}
-.btn.ghost{background:transparent;color:var(--pine)}
-.btn.ghost:hover{background:var(--paper2)}
-.dl-note{margin:10px 0 0;font-size:12px;color:var(--dim);max-width:34em}
-.decl{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.75;color:var(--dim);max-width:60em}
-.decl strong{display:inline-block;margin-right:8px;color:var(--pine);font-weight:600}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;font-size:14px;border:1px solid var(--accent);background:var(--accent);color:#fff;text-decoration:none;cursor:pointer;font-family:inherit;border-radius:10px}
+.btn:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.dl-note{margin:10px 0 0;font-size:12.5px;color:var(--dim);max-width:34em}
+
+/* 通用段落 */
+.sec{padding:34px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.sec-head h2{font-size:19px;margin:0;letter-spacing:.01em}
+.sec-head .hint{font-size:12.5px;color:var(--dim)}
 
 /* 实机界面 */
 .shot{margin:0}
-.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);background:var(--paper2)}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:14px;background:#fff}
 .shot figcaption{margin-top:10px;font-size:12.5px;color:var(--dim);line-height:1.7}
-
-/* —— 通用段落 —— */
-.sec{padding:38px 0;border-bottom:1px solid var(--line)}
-.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
-.sec-head h2{font-size:19px;margin:0;letter-spacing:.02em}
-.sec-head .hint{font-size:12px;color:var(--dim)}
 
 /* 三栏说明 */
 .facts{display:grid;grid-template-columns:1fr;gap:0}
 .facts > div{padding:16px 0;border-top:1px solid var(--line)}
 .facts > div:first-child{border-top:0;padding-top:0}
-.facts h3{font-size:15px;margin:0 0 6px;color:var(--pine)}
+.facts h3{font-size:15px;margin:0 0 6px;color:var(--accent)}
 .facts p{margin:0;font-size:14px;color:#31403A}
 
 /* 表格 */
 .tbl-wrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:14px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:12px;letter-spacing:.08em;color:var(--dim);font-weight:600;background:var(--paper2)}
-td.mono{color:var(--pine)}
+th{font-size:12px;letter-spacing:.08em;color:var(--dim);font-weight:600;background:var(--accent-soft)}
+td.mono{color:var(--accent)}
 td.note{color:var(--dim);font-size:13px}
-
-/* 版本列表 */
-.rel{display:grid;grid-template-columns:88px 1fr;gap:0}
-.rel-row{display:contents}
-.rel-row > .d{
-  font-size:12px;color:var(--dim);padding:14px 0 14px 0;border-top:1px solid var(--line);
-  display:flex;align-items:flex-start;
-}
-.rel-row > .c{padding:14px 0;border-top:1px solid var(--line)}
-.rel-row:first-child > .d,.rel-row:first-child > .c{border-top:0}
-.c h3{font-size:14px;margin:0 0 4px;color:var(--pine)}
-.c p{margin:0;font-size:13px;color:#31403A}
 
 /* 前世今生时间轴 */
 .tl{display:block;margin-top:6px}
@@ -126,77 +93,95 @@ td.note{color:var(--dim);font-size:13px}
 .tl-item .axis{position:relative;justify-self:center;width:1px}
 .tl-item .axis::before{content:"";position:absolute;left:50%;top:2px;bottom:-26px;width:1px;background:var(--line);transform:translateX(-50%)}
 .tl-item:last-child .axis::before{display:none}
-.tl-item .axis::after{content:"";position:absolute;left:50%;top:6px;width:9px;height:9px;background:var(--pine);border-radius:50%;transform:translateX(-50%)}
+.tl-item .axis::after{content:"";position:absolute;left:50%;top:6px;width:9px;height:9px;background:var(--accent);border-radius:50%;transform:translateX(-50%)}
 .tl-item .body{min-width:0}
 .tl-item .yr{display:block;font-size:12px;letter-spacing:.06em;color:var(--dim);margin-bottom:4px}
-.tl-item h3{font-size:14px;margin:0 0 5px;color:var(--pine)}
+.tl-item h3{font-size:14px;margin:0 0 5px;color:var(--text)}
 .tl-item p{margin:0;font-size:13.5px;line-height:1.7;color:#31403A;max-width:52em}
-.tl-lead{font-size:15px;line-height:1.85;color:#25332E;max-width:46em;margin:0 0 26px}
+.tl-lead{font-size:15px;line-height:1.85;color:#25303D;max-width:46em;margin:0 0 26px}
 .tl-lead em{font-style:normal;color:var(--accent)}
 
-/* 操作流程分段 */
-.stg{display:block}
-.stg-row{display:grid;grid-template-columns:32px 1fr;column-gap:12px;padding:18px 0;border-top:1px solid var(--line)}
-.stg-row:first-child{border-top:0;padding-top:0}
-.stg-row .n{font-size:12px;color:var(--dim);letter-spacing:.1em;padding-top:3px}
-.stg-row h3{font-size:15.5px;font-weight:600;margin:0 0 6px;color:var(--pine)}
-.stg-row p{margin:0;font-size:13.5px;line-height:1.8;color:#31403A;max-width:54em}
-.stg-row p b{color:var(--pine);font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
-.chip{font-size:12.5px;font-weight:400;line-height:1.6;padding:3px 9px;border:1px solid var(--line);background:var(--paper2);color:#55635D}
-.grp{font-size:12.5px;color:var(--pine);font-weight:600;margin:14px 0 0;letter-spacing:.04em}
+/* 菜单分组卡片 */
+.groups{display:grid;grid-template-columns:1fr;gap:18px}
+.group{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.group-head{padding:18px 22px 14px;border-bottom:1px solid var(--line)}
+.group-head .gh-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.group-head .gn{font-size:15px;font-weight:700}
+.group-head .gno{font-size:12px;color:var(--accent);font-weight:600}
+.group-head p{margin:6px 0 0;font-size:13px;color:var(--dim);max-width:56em}
+.rows{padding:6px 0}
+.row{display:grid;grid-template-columns:1fr;gap:3px;padding:12px 22px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .rt{display:flex;align-items:center;gap:8px;min-width:0}
+.row .rt .name{font-size:14px;font-weight:600}
+.badge{font-size:11px;color:var(--warn);border:1px solid var(--warn);border-radius:6px;padding:1px 7px;white-space:nowrap}
+.badge.opt{color:var(--dim);border-color:var(--border)}
+.row .rd{margin:0;font-size:13px;color:#3C4858}
+.row .hl{margin:5px 0 0;font-size:13px;color:var(--accent);display:flex;gap:7px;align-items:baseline}
+.row .hl::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;transform:translateY(-1px)}
+.row .hl b{font-weight:600;white-space:nowrap}
 
-/* 捐助者名单 */
+/* 工具表 */
+.tools{display:grid;grid-template-columns:1fr;gap:0;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.tool-row{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:16px 22px;border-top:1px solid var(--line)}
+.tool-row:first-child{border-top:0}
+.tool-row .tn{font-weight:700;font-size:14px;color:var(--accent)}
+.tool-row .td{margin:0;font-size:13.5px;color:#3C4858}
+.tools-note{margin:14px 0 0;font-size:12.5px;color:var(--dim);line-height:1.8;max-width:56em}
+.decl{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.75;color:var(--dim);max-width:60em}
+.decl strong{display:inline-block;margin-right:8px;color:var(--text);font-weight:600}
+
+/* 版本列表 */
+.rel{display:grid;grid-template-columns:96px 1fr;gap:0}
+.rel-row{display:contents}
+.rel-row > .d{font-size:12px;color:var(--dim);padding:14px 0;border-top:1px solid var(--line);display:flex;align-items:flex-start}
+.rel-row > .c{padding:14px 0;border-top:1px solid var(--line)}
+.rel-row:first-child > .d,.rel-row:first-child > .c{border-top:0}
+.c h3{font-size:14px;margin:0 0 4px;color:var(--text)}
+.c p{margin:0;font-size:13px;color:#31403A}
+
+/* 赞助者 */
 .dlist{display:grid;grid-template-columns:1fr;margin-top:8px;border-top:1px solid var(--line)}
-.ditem{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  padding:10px 0;border-bottom:1px solid var(--line)}
-.ditem .dn{font-size:14px;font-weight:600;color:var(--pine);min-width:0}
+.ditem{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.ditem .dn{font-size:14px;font-weight:600;color:var(--text);min-width:0}
 .ditem .dq{font-size:12.5px;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
-.qrcard{display:grid;grid-template-columns:1fr;gap:16px;justify-items:start;margin:22px 0 0;
-  padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.qrcard{display:grid;grid-template-columns:1fr;gap:16px;justify-items:start;margin:22px 0 0;padding:18px;border:1px solid var(--border);border-radius:12px;background:#fff}
 .qrcard img{display:block;width:132px;height:131px;border-radius:10px}
-.qrcard h3{margin:0 0 6px;font-size:15px;line-height:1.4;color:var(--pine)}
-.qrcard p{margin:0;font-size:13px;line-height:1.9;color:#3C4A44;max-width:34em}
-@media (min-width:720px){
-  .dlist{grid-template-columns:repeat(2,1fr);column-gap:36px}
-  .qrcard{grid-template-columns:auto 1fr;align-items:center;gap:20px}
-}
+.qrcard h3{margin:0 0 6px;font-size:15px;line-height:1.4;color:var(--text)}
+.qrcard p{margin:0;font-size:13px;line-height:1.9;color:#3C4858;max-width:34em}
 .donor-note{font-size:13px;line-height:1.9;color:var(--dim);margin:14px 0 0;max-width:52em}
-.donor-note b{color:var(--pine);font-weight:600}
+.donor-note b{color:var(--text);font-weight:600}
 
 /* FAQ */
 .faq{display:grid;grid-template-columns:1fr;gap:14px}
 .faq details{border-top:1px solid var(--line);padding-top:12px}
 .faq details[open]{padding-bottom:6px}
-.faq summary{font-size:14px;cursor:pointer;color:var(--pine);list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary{font-size:14px;cursor:pointer;color:var(--text);list-style:none;display:flex;justify-content:space-between;gap:12px}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary i{font-style:normal;color:var(--dim)}
 .faq p{margin:8px 0 0;font-size:13px;color:#31403A;max-width:52em}
 
 /* 页脚 */
-.foot{padding:26px 0 40px;font-size:12px;color:var(--dim)}
+.foot{padding:28px 0 42px;font-size:12.5px;color:var(--dim);border-top:1px solid var(--line)}
 .foot-grid{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.foot a{color:var(--pine);text-decoration:none;border-bottom:1px solid var(--line)}
-.toast{
-  position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
-  background:var(--pine);color:var(--paper);font-size:13px;
-  padding:10px 16px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;
-  z-index:30;
-}
+.foot a{color:var(--accent);text-decoration:none}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--text);color:#fff;font-size:13px;padding:10px 16px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:30}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 @media (min-width:640px){
   .facts{grid-template-columns:repeat(3,1fr);column-gap:28px}
   .facts > div{border-top:0;padding:0}
-  .facts > div:first-child{padding-top:0}
   .faq{grid-template-columns:repeat(2,1fr);column-gap:28px}
-  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .dlist{grid-template-columns:repeat(2,1fr);column-gap:36px}
+  .qrcard{grid-template-columns:auto 1fr;align-items:center;gap:20px}
+}
+@media (min-width:720px){
+  .groups{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:900px){
-  .hero{padding:64px 0 48px}
+  .hero{padding:58px 0 40px}
   .hero-grid{grid-template-columns:minmax(0,1fr) 300px;align-items:end}
-  .rel{grid-template-columns:120px 1fr}
-  .sec{padding:48px 0}
+  .sec{padding:44px 0}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important}
@@ -208,64 +193,64 @@ td.note{color:var(--dim);font-size:13px}
 <div class="topbar">
   <div class="wrap topbar-in">
     <div class="brand">
-      <b>YCDISM</b><span class="mono">2026.11.12.1</span>
+      <b>YCDISM</b><span class="ver mono">2026.11.15.1 · 公测版 V6</span>
     </div>
-    <div class="topacts">
-      <span class="ver mono">NT10X</span>
+    <nav class="topacts">
       <a href="#intro">前世今生</a>
-      <a href="#flow">操作流程</a>
-      <a href="#tools">工具集</a>
+      <a href="#facts">能力概览</a>
+      <a href="#menus">功能菜单</a>
+      <a href="#tools">自研工具</a>
       <a href="#rel">本版更新</a>
-      <a href="#donors">捐助者</a>
+      <a href="#donors">赞助名单</a>
       <a href="#faq">常见问题</a>
-      <a href="https://github.com/YCDISM2026" rel="noopener">GitHub</a>
-    </div>
+    </nav>
   </div>
 </div>
 
 <div class="wrap">
+
   <section class="hero">
     <div class="hero-grid">
-      <div class="">
+      <div>
         <p class="tag mono">WINDOWS IMAGE STUDIO · 雨晨绿软</p>
-        <h1>YCDISM</h1>
-        <p class="lead" style="margin-top:22px">YCDISM是Windows 映像装载定制、增强、精简、优化、自定义设置一体化完全离线装载制作工具、基本实现在部署前完成目标系统的一切个性设置和定制功能。
-        </p>
+        <h1>YCDISM 2026</h1>
+        <p class="sub">雨晨装载增强精简优化 · 系统制作程序 · Windows 10/11</p>
+        <p class="lead">YCDISM 是 Windows 映像装载定制、增强、精简、优化、自定义设置一体化的完全离线装载制作工具，基本实现在部署前完成目标系统的各项个性设置与定制功能。</p>
         <div class="cta">
-          <button class="btn" id="dl-btn" type="button">获取YCDISM</button>
-          <a class="btn ghost" href="#tools">附属工具</a>
+          <button class="btn" id="dl-btn" type="button">获取 YCDISM</button>
+          <a class="btn ghost" href="#tools">自研工具</a>
         </div>
-        <p class="dl-note" id="dl-note">正式版程序仍在不断增强，若感兴趣请持续关注，一有公测会第一时间在此提供直链</p>
+        <p class="dl-note" id="dl-note">正式版程序仍在不断增强，若感兴趣请持续关注，开放后这里会提供下载入口</p>
       </div>
       <div class="hero-side">
-        <div class="stat"><b class="mono">9.66 MB</b><span>主程序单文件，x86 / x64 通用</span></div>
-        <div class="stat"><b class="mono">52</b><span class="">核心所需工具内嵌</span></div>
-        <div class="stat"><b class="mono">NT10X</b><b class="mono">理论上支持Win7至最新Win11-29xxx系统</b><span>面向 Win10 / Win11 映像制作</span></div>
+        <div class="stat"><b class="mono">36 项</b><span>主程序核心功能菜单</span></div>
+        <div class="stat"><b class="mono">Win10 / 11</b><span>面向离线映像制作</span></div>
+        <div class="stat"><b class="mono">装载 → 处理 → 输出</b><span>一条链路走完定制流程</span></div>
       </div>
     </div>
   </section>
 
   <section class="sec" id="shot">
-    <div class="sec-head"><h2>实机界面</h2><span class="hint">顶上两行信息，中间三十六项功能，下面是运行日志</span></div>
+    <div class="sec-head"><h2>主界面示意</h2><span class="hint">上方为当前系统与当前装载信息，中部为功能菜单，下方为运行日志</span></div>
     <figure class="shot">
-      <img src="assets/YCDISM_V5.jpg" alt="YCDISM 2026 公测版 V5 主界面" width="1000" height="740" loading="lazy">
-      <figcaption>第一行是当前系统，第二行是已装载的映像，架构、语言、安装时间、版本都随映像走；功能按组件与应用、精简与清理、补丁与运行库、优化与个性化分组，已在本次加载里用过的项会标勾；底部日志逐条给出进度与耗时，结束时汇总成功、失败数量。</figcaption>
+      <img src="YCDISM.png" alt="YCDISM 2026 公测版 V6 主界面" loading="lazy">
+      <figcaption>第一行是当前系统，第二行是已装载的映像，架构、语言、版本都随映像走；功能按处理阶段分组，本轮已执行过的项会在界面上标记；底部日志逐条给出进度与结果，结束时汇总成功与失败情况。</figcaption>
     </figure>
   </section>
 
   <section class="sec" id="intro">
-    <div class="sec-head"><h2>前世今生</h2><span class="hint">从手工摸系统，到 ADK 全流程</span></div>
+    <div class="sec-head"><h2>前世今生</h2><span class="hint">从手工摸索系统，到规范全流程</span></div>
     <p class="tl-lead">
-      YCDISM 是雨晨 CMD 版程序<em>功能与互动性质上的</em>一次升华。依据20多年手动和程序化制作及海量测试沉淀之后的积累：程序智能判断，最后决定权仍交给用户决断。
-      所有能力都建立在与 <em>ADK 技术的深度融合</em>——按微软ADK官方文档规范与流程执行，再把经验叠在规范之内，通过横向、纵向、多层级、多维度整合对装载映像做定制、增强、精简、优化与自定义设置，从而轻轻松松完成定制工作。
+      YCDISM 是雨晨早期命令行版程序在<em>功能与互动方式上的</em>一次升华。依据二十多年手动与程序化制作、海量测试沉淀下来的积累：程序负责智能判断，最后的决定权仍交给用户。
+      所有能力都建立在<em>遵循官方规范与流程</em>的基础上，再把多年经验叠在规范之内，通过横向、纵向、多层级、多维度的整合，对装载映像做定制、增强、精简、优化与自定义设置，从而轻松完成定制工作。
     </p>
     <div class="tl">
       <div class="tl-item">
         <div class="axis"></div>
         <div class="body">
           <span class="yr">经验起点 · Windows ME / 98</span>
-          <h3 class="">雨晨是一个出生于70年代的老登，喜欢系统DIY是本程序由来的根源</h3>
-          <p class="">早期的MS OS个人DIY的面非常有限，也没如今系统的普及面广。</p>
+          <h3>喜欢系统 DIY 是本程序由来的根源</h3>
+          <p>早期的桌面操作系统个人 DIY 的面非常有限，也没有如今系统这么普及。</p>
         </div>
       </div>
       <div class="tl-item">
@@ -273,7 +258,7 @@ td.note{color:var(--dim);font-size:13px}
         <div class="body">
           <span class="yr">程序起点 · Windows XP</span>
           <h3>YCDISM 的前身诞生</h3>
-          <p>核心操作基于 imagex.exe，第一次把原本零散的命令行串成一套可复用的流程，映像制作从"每次重新摸"变成"照着走"。</p>
+          <p>第一次把原本零散的操作串成一套可复用的流程，映像制作从“每次重新摸索”变成“照着流程走”。</p>
         </div>
       </div>
       <div class="tl-item">
@@ -281,7 +266,7 @@ td.note{color:var(--dim);font-size:13px}
         <div class="body">
           <span class="yr">过渡 · Windows Vista</span>
           <h3>跟着系统换代</h3>
-          <p>镜像格式与部署方式换代，工具链一边追系统，一边把处理链路补齐，为后来的完整形态打底。</p>
+          <p>映像格式与部署方式换代，处理链路一边追系统、一边补齐，为后来的完整形态打底。</p>
         </div>
       </div>
       <div class="tl-item">
@@ -289,219 +274,263 @@ td.note{color:var(--dim);font-size:13px}
         <div class="body">
           <span class="yr">成形 · Windows 7</span>
           <h3>初具完整状态</h3>
-          <p>装载、精简、优化、打包基本成形，CMD 版本已经能独立跑完一整套制作流程，这也是后来 GUI 版本对照的底本。</p>
+          <p>装载、精简、优化、打包基本成形，早期命令行版本已经能独立跑完一整套制作流程，这也是后来图形版本对照的底本。</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="axis"></div>
         <div class="body">
           <span class="yr">自 Windows 8 起</span>
-          <h3>全面转入 ADK</h3>
-          <p>所有核心操作改由 ADK 的 dism.exe 完成，遵照官方规范与流程，把官方的横向、纵向与多层级能力结合起来，叠加多年手工经验，对装载映像做定制、增强、精简、优化与个性设置。</p>
+          <h3>全面按官方规范组织流程</h3>
+          <p>核心操作遵照官方规范与流程执行，把横向、纵向与多层级能力结合起来，叠加多年手工经验，对装载映像做定制、增强、精简、优化与个性设置。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="sec-head"><h2 class="">YCDISM能做什么</h2><span class="hint">装载 → 处理 → 打包，一条链路走完</span></div>
+  <section class="sec" id="facts">
+    <div class="sec-head"><h2>YCDISM 能做什么</h2><span class="hint">装载 → 处理 → 打包，一条链路走完</span></div>
     <div class="facts">
       <div>
         <h3>装载与卸载</h3>
-        <p>选好并行位置里的映像，点一下装载就能开始干活；日志会给出挂载路径，处理完再卸载回写。中途退出留下的挂载，下次启动会先清干净，不会带着脏数据继续。</p>
+        <p>选好映像即可装载开始处理，日志给出进度，处理完再卸载回写。中途退出留下的装载残留，下次启动会先清理干净，不会带着脏数据继续。</p>
       </div>
       <div>
         <h3>精简与组件处理</h3>
-        <p class="">系统应用管理、增强、自选卸载组件、特殊处理组件、Winsxs 精简、NetFx3 离线安装、LCU / FOD / PSF 补丁，按清单勾选执行；能选什么由目标系统的版本决定，界面上不会出现用不了的选项。</p>
+        <p>系统应用管理、增强、自选卸载组件、特殊处理组件、组件库精简、运行库离线安装、各类补丁按清单勾选执行；能选什么由目标系统的版本决定，界面上不会出现用不了的选项。</p>
       </div>
       <div>
         <h3>优化与个性化</h3>
-        <p>通用优化单项选择逐条勾选，右键菜单、文件关联、任务栏图标居中与透明按需开启；这些设置只对目标机生效，不回头改动你正在用的这台电脑。</p>
+        <p>通用优化逐项勾选，右键菜单、文件关联、任务栏图标居中与透明按需开启；这些设置只对目标机生效，不回头改动当前正在使用的这台电脑。</p>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="flow">
-    <div class="sec-head"><h2>操作流程</h2><span class="hint">选择 → 装载 → 中间三十项功能 → 扫尾退出</span></div>
-    <div class="stg">
-      <div class="stg-row">
-        <span class="n mono">01</span>
-        <div>
-          <h3>选择 ISO 或映像</h3>
-          <div class="chips">
-            <span class="chip">选择 ISO 或映像</span><span class="chip">选择或装载映像</span>
-          </div>
+  <section class="sec" id="menus">
+    <div class="sec-head"><h2>功能菜单</h2><span class="hint">按一级菜单分组列出子菜单与处理流程，不含具体操作命令与实现细节</span></div>
+    <div class="groups">
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">01</span><span class="gn">映像接入</span></div>
+          <p>从本地选择映像或安装镜像，识别其中的系统索引与版本信息，完成装载后进入可定制状态。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">选择 ISO 或映像</span></div><p class="rd">浏览本地 ISO 或映像文件，识别可选的系统索引与基本信息。</p><p class="hl"><b>亮点</b>索引、架构、版本自动识别，不用手工翻找对照。</p></div>
+          <div class="row"><div class="rt"><span class="name">选择或装载映像</span></div><p class="rd">在已识别的映像上完成装载，使后续定制操作可作用于该映像。</p><p class="hl"><b>亮点</b>启动先清理历史残留挂载，脏状态不进入本轮处理。</p></div>
+          <div class="row"><div class="rt"><span class="name">去 PShell 右键菜单</span></div><p class="rd">整理开始菜单与右键菜单中的 PowerShell 入口。</p><p class="hl"><b>亮点</b>开始菜单、右键菜单与 WinX 快捷方式三处入口一并整理，不留零散残留。</p></div>
         </div>
       </div>
-      <div class="stg-row">
-        <span class="n mono">02</span>
-        <div>
-          <h3>装载</h3>
-          <div class="chips">
-            <span class="chip">装载映像</span>
-          </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">02</span><span class="gn">应用与功能</span></div>
+          <p>围绕预装应用与系统可选功能，按清单勾选卸载、回退或启用，改动只作用于离线映像。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">卸载或安装 APPx</span></div><p class="rd">按清单卸载预装应用包，并清理对应残留。</p><p class="hl"><b>亮点</b>真正自选卸载，受限卸载后的残留也能精确清理，不误杀共享依赖的其它应用。</p></div>
+          <div class="row"><div class="rt"><span class="name">移除可选功能</span></div><p class="rd">卸载系统内置的可选功能组件。</p><p class="hl"><b>亮点</b>可选项由目标系统版本自动判定，界面上不摆用不了的选项。</p></div>
+          <div class="row"><div class="rt"><span class="name">启用或关闭功能</span></div><p class="rd">按需开启或关闭系统内置功能。</p><p class="hl"><b>亮点</b>内置功能按需开关，全程只改离线映像，不影响本机。</p></div>
+          <div class="row"><div class="rt"><span class="name">更新添加 APPx 应用</span></div><p class="rd">比对并集成、更新预置应用包及其依赖。</p><p class="hl"><b>亮点</b>预置应用一键更新；按规范手工加入的应用也能识别并精准匹配依赖、同步更新。</p></div>
         </div>
       </div>
-      <div class="stg-row">
-        <span class="n mono">03</span>
-        <div>
-          <h3 class="">共分36大项功能</h3>
-          <p class="grp">组件与应用</p>
-          <div class="chips">
-            <span class="chip">卸载或安装 APPx</span><span class="chip">更新添加 APPx 应用</span><span class="chip">移除可选功能</span><span class="chip">启用或关闭功能</span><span class="chip">卸载 Cortana</span><span class="chip">精简 SystemAppx</span><span class="chip">添加或恢复小程序</span><span class="chip">移除 OneDrive</span><span class="chip">移除杀毒 WD 数据</span>
-          </div>
-          <p class="grp">精简与清理</p>
-          <div class="chips">
-            <span class="chip">自选移除卸载组件</span><span class="chip">特殊处理组件</span><span class="chip">WinSxS 库精简</span><span class="chip">制作提取组件封包</span><span class="chip">精简 Assembly</span><span class="chip">精简 Font 字体</span><span class="chip">清理压缩映像存储</span><span class="chip">精简或集成 Edge</span>
-          </div>
-          <p class="grp">补丁、运行库与驱动</p>
-          <div class="chips">
-            <span class="chip">集成补丁或功能包</span><span class="chip">整合 VC / NET48 / DX9</span><span class="chip">安装已知设备驱动</span><span class="chip">卸载非内置驱动</span>
-          </div>
-          <p class="grp">优化与个性化</p>
-          <div class="chips">
-            <span class="chip">个性通用优化设置</span><span class="chip">添加通用无人值守</span><span class="chip">低版本加组策略</span><span class="chip">自助集成安装密钥</span><span class="chip">替换美化主题图标</span><span class="chip">关闭虚拟内存</span><span class="chip">禁止更新及相关</span><span class="chip">提升装载映像版本</span>
-          </div>
-          <p class="grp">其它</p>
-          <div class="chips">
-            <span class="chip">去 PShell 右键菜单</span>
-          </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">03</span><span class="gn">补丁与运行库</span></div>
+          <p>把更新补丁、功能包与常用运行库纳入映像，按目标版本与基线自动归类排序。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">集成补丁或功能包</span></div><p class="rd">按所选模式集成更新补丁与功能包，自动归类、排序并匹配基线。</p><p class="hl"><b>亮点</b>联网全自动一条链：自动获取、下载、排序并按基线匹配，增量差量、压缩包与映像组合、热补丁及 ESU 类一并识别处理，无需逐个下载寻找。</p></div>
+          <div class="row"><div class="rt"><span class="name">整合 VC / NET48 / DX9</span></div><p class="rd">整合常用运行库与图形运行数据。</p><p class="hl"><b>亮点</b>常用运行库与图形运行数据一次整合到位，部署后免再逐个补运行库。</p></div>
+          <div class="row"><div class="rt"><span class="name">提升装载映像版本</span></div><p class="rd">把装载映像的系统版本升级到更高档位。</p><p class="hl"><b>亮点</b>跨版本升级档位，版本特征包成对处理，不误排不相干的中性包。</p></div>
         </div>
       </div>
-      <div class="stg-row">
-        <span class="n mono">04</span>
-        <div>
-          <h3>扫尾退出</h3>
-          <div class="chips">
-            <span class="chip">保存已改变的映像</span><span class="chip">增量保存装载映像</span><span class="chip">自选卸载映像</span><span class="chip">重命名或输出</span><span class="chip">打包 ESD 或 ISO</span>
-          </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">04</span><span class="gn">系统精简与移除</span></div>
+          <p>针对不再需要的内置组件、应用、字体与残留进行精简；带风险标记的项需谨慎确认后执行。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">清理压缩映像存储</span></div><p class="rd">清理映像压缩存储中的失效残留。</p><p class="hl"><b>亮点</b>只清失效残留，正常装载的映像不受影响。</p></div>
+          <div class="row"><div class="rt"><span class="name">移除杀毒 WD 数据</span></div><p class="rd">移除内置杀毒相关数据。</p><p class="hl"><b>亮点</b>定向剥离内置杀毒相关数据，不误伤其它组件。</p></div>
+          <div class="row"><div class="rt"><span class="name">移除 OneDrive</span></div><p class="rd">移除 OneDrive 组件。</p><p class="hl"><b>亮点</b>组件连同残留整体移除，不留下散件。</p></div>
+          <div class="row"><div class="rt"><span class="name">精简或集成 Edge</span></div><p class="rd">精简浏览器组件，或按需要集成当前浏览器映像。</p><p class="hl"><b>亮点</b>既可精简，也能一键更新并把当前系统浏览器映像捕获回装载映像，真正完成更新目的。</p></div>
+          <div class="row"><div class="rt"><span class="name">卸载 Cortana</span></div><p class="rd">移除语音助手组件。</p><p class="hl"><b>亮点</b>定向移除语音助手组件，处理范围干净可控。</p></div>
+          <div class="row"><div class="rt"><span class="name">精简 Assembly</span></div><p class="rd">精简程序集目录中的冗余内容。</p><p class="hl"><b>亮点</b>程序集目录冗余定向瘦身，不动必要文件。</p></div>
+          <div class="row"><div class="rt"><span class="name">精简 SystemAppx</span><span class="badge">风险项</span></div><p class="rd">精简系统内置应用。</p><p class="hl"><b>亮点</b>系统内置应用按需精简，共享依赖受保护。</p></div>
+          <div class="row"><div class="rt"><span class="name">添加或恢复小程序</span></div><p class="rd">添加或恢复经典小程序组件。</p><p class="hl"><b>亮点</b>被裁掉的经典小程序组件可按需补回。</p></div>
+          <div class="row"><div class="rt"><span class="name">精简 Font 字体</span></div><p class="rd">精简多余字体。</p><p class="hl"><b>亮点</b>多余字体定向剔除，控制映像体积。</p></div>
+          <div class="row"><div class="rt"><span class="name">自选移除卸载组件</span><span class="badge">风险项</span></div><p class="rd">自选卸载指定存储组件。</p><p class="hl"><b>亮点</b>自选卸载存储组件，共享依赖不误删。</p></div>
+          <div class="row"><div class="rt"><span class="name">WinSxS 库精简</span><span class="badge">风险项</span></div><p class="rd">精简组件存储。</p><p class="hl"><b>亮点</b>组件库定向精简，在保留可用组件的前提下压缩存储。</p></div>
+          <div class="row"><div class="rt"><span class="name">特殊处理组件</span><span class="badge">风险项</span></div><p class="rd">对特殊补丁与组件做专项清理。</p><p class="hl"><b>亮点</b>除自身操作残留外，也能清理其它工具制作映像留下的残留，相当于在完整组件存储状态下执行移除。</p></div>
         </div>
       </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">05</span><span class="gn">驱动 · 个性化 · 授权</span></div>
+          <p>处理设备驱动、主题图标、策略项与安装密钥，使定制后的系统更贴合使用习惯。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">安装已知设备驱动</span></div><p class="rd">导入常用设备驱动到映像。</p><p class="hl"><b>亮点</b>常用驱动批量带入映像，部署后即带驱动、免再逐台安装。</p></div>
+          <div class="row"><div class="rt"><span class="name">卸载非内置驱动</span></div><p class="rd">移除非系统自带的驱动。</p><p class="hl"><b>亮点</b>只剔除非系统自带驱动，内置驱动保持不动。</p></div>
+          <div class="row"><div class="rt"><span class="name">替换美化主题图标</span></div><p class="rd">替换主题与图标资源。</p><p class="hl"><b>亮点</b>主题与图标资源整体替换，外观风格一次统一。</p></div>
+          <div class="row"><div class="rt"><span class="name">低版本加组策略</span></div><p class="rd">为低版本系统补齐组策略项。</p><p class="hl"><b>亮点</b>低版本系统也能补齐对应的组策略项，缩小版本间差距。</p></div>
+          <div class="row"><div class="rt"><span class="name">自助集成安装密钥</span></div><p class="rd">集成安装密钥。</p><p class="hl"><b>亮点</b>安装密钥自助集成，无需另外手工处理。</p></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">06</span><span class="gn">优化与策略</span></div>
+          <p>通过向导逐项选择通用优化、无人值守与系统策略设置；通用优化项仅全功能版提供。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">个性通用优化设置</span><span class="badge opt">仅全功能版</span></div><p class="rd">进入优化向导，按选项调整通用系统设置。</p><p class="hl"><b>亮点</b>向导逐项勾选，右键归类做二级归纳，菜单不再被拉得过长。</p></div>
+          <div class="row"><div class="rt"><span class="name">添加通用无人值守</span></div><p class="rd">写入通用无人值守应答配置。</p><p class="hl"><b>亮点</b>通用应答配置一次写入，后续部署流程更顺。</p></div>
+          <div class="row"><div class="rt"><span class="name">关闭虚拟内存</span></div><p class="rd">关闭虚拟内存设置。</p><p class="hl"><b>亮点</b>按需要关闭虚拟内存，定制结果随映像带走。</p></div>
+          <div class="row"><div class="rt"><span class="name">禁止更新及相关</span></div><p class="rd">屏蔽系统更新及关联组件。</p><p class="hl"><b>亮点</b>系统更新及关联组件一并屏蔽，不留后门项。</p></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">07</span><span class="gn">组件提取与封包</span></div>
+          <p>从映像中提取指定组件，按规范结构整理成可复用的封包。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">制作提取组件封包</span></div><p class="rd">从映像中提取指定组件，按官方包结构整理成封包。</p><p class="hl"><b>亮点</b>沿引用关系完整并入清单、子包与载荷，备份副本一并收录，封包结构与官方特征包一致，可直接安装复用。</p></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head">
+          <div class="gh-top"><span class="gno">08</span><span class="gn">保存与输出</span></div>
+          <p>处理完成后把改动保存回映像，或交由自研打包工具完成重命名、导出与成品封装。</p>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="rt"><span class="name">保存已改变的映像</span></div><p class="rd">把本轮改动保存回映像。</p><p class="hl"><b>亮点</b>本轮改动完整回写，处理成果不丢失。</p></div>
+          <div class="row"><div class="rt"><span class="name">增量保存装载映像</span></div><p class="rd">以增量方式保存本轮改动。</p><p class="hl"><b>亮点</b>增量保存，减少重复写入，保存更快。</p></div>
+          <div class="row"><div class="rt"><span class="name">自选卸载映像</span></div><p class="rd">按选择卸载已装载映像。</p><p class="hl"><b>亮点</b>精准识别已装载映像，按选择卸载，不误伤其它映像。</p></div>
+          <div class="row"><div class="rt"><span class="name">重命名或输出</span></div><p class="rd">打开自研打包工具 YCPack，进行重命名、导出与成品封装。</p><p class="hl"><b>亮点</b>自研 YCPack 承接重命名、纯净导出、标准封装与加解密，独立进度窗口完成，主程序可随即退出。</p></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <section class="sec" id="tools">
-    <div class="sec-head"><h2>随包工具</h2><span class="hint">随主程序就位，无需另行安装</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <colgroup>
-          <col style="width:26%"><col style="width:44%"><col style="width:14%"><col style="width:16%">
-        </colgroup>
-        <thead>
-          <tr><th>程序</th><th>用途</th><th>架构</th><th>依赖</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="mono">YCTB.exe</td>
-            <td>任务栏程序图标居中 + 任务栏透明，托盘右键四项开关</td>
-            <td class="mono">x86</td>
-            <td class="note">零依赖原生</td>
-          </tr>
-          <tr>
-            <td class="mono">YCCTX.exe</td>
-            <td>右键菜单与上下文项管理</td>
-            <td class="mono">x86</td>
-            <td class="note">.NET</td>
-          </tr>
-          <tr>
-            <td class="mono">YCDISMACx86/x64.exe</td>
-            <td>映像内自动化动作执行</td>
-            <td class="mono">x86 / x64</td>
-            <td class="note">随宿主位数取</td>
-          </tr>
-          <tr>
-            <td class="mono">YCPack.exe</td>
-            <td class="">重命名/输出纯净映像、打包 ESD/ISO 与 ESD 加解密（内置实现）</td>
-            <td class="mono">AnyCPU</td>
-            <td class="note">不随包常驻；内嵌于程序，用到时才释放到 TOOL，仅限 YCDISM.exe 调用</td>
-          </tr>
-          <tr>
-            <td class="mono">YCAC.exe</td>
-            <td class="">确保用户有ADK权限</td>
-            <td class="mono">x86/x64</td>
-            <td class="note"><br></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="sec-head"><h2>自研工具</h2><span class="hint">随主程序一同就位的自有程序，按处理阶段按需调用</span></div>
+    <div class="tools">
+      <div class="tool-row"><div class="tn">YCDISM</div><p class="td">主程序，映像装载、定制、精简、优化与设置的一体化入口。</p></div>
+      <div class="tool-row"><div class="tn">YCPack</div><p class="td">独立打包工具，由主程序调用，负责映像重命名、纯净导出、标准 ISO / ESD 封装、官方 ESD 转 ISO，以及映像解密与自制映像加密。</p></div>
+      <div class="tool-row"><div class="tn">YCTB</div><p class="td">任务栏图标居中与透明的运行时组件，托盘右键开关，随定制映像部署后在目标机运行。</p></div>
+      <div class="tool-row"><div class="tn">YCCTX</div><p class="td">内嵌于映像的右键辅助菜单程序。</p></div>
+      <div class="tool-row"><div class="tn">YCDISMAC</div><p class="td">映像内自动化动作执行，按宿主位数取用对应版本。</p></div>
+      <div class="tool-row"><div class="tn">YCAC</div><p class="td">权限提升辅助，用于映像内需要更高权限才能完成的写入动作。</p></div>
     </div>
+    <p class="tools-note">YCPack 内的处理项依次为：重新命名映像、导出纯净映像、打包标准 ISO、打包标准 ESD、官方 ESD 转 ISO、官方映像解密、自制映像加密。</p>
     <div class="decl">
-      <p><strong>版权声明</strong>随包工具中如含第三方开源程序，均来自网络公开渠道，版权归各原作者所有，本项目仅作集成与分发，不作售卖。WIM／ESD 读写、PSF 解码、CAB 与压缩包处理等已改为程序内置实现或系统自带工具，不再随包分发对应的第三方程序。若权利人认为收录不妥、希望下架，可通过页脚 QQ 或仓库 Issue 联系，核实后第一时间移除。</p>
+      <p><strong>版权声明</strong>随包工具均为本项目自研；如集成了来自公开渠道的开源组件，版权归各原作者所有，本项目仅作集成与分发，不作售卖。若权利人认为收录不妥、希望下架，可通过页脚联系方式核实后移除。</p>
     </div>
   </section>
 
   <section class="sec" id="rel">
-    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.15_12:30:18</span></div>
+    <div class="sec-head"><h2>本版更新</h2><span class="hint">2026.11.15</span></div>
     <div class="rel">
       <div class="rel-row">
-        <div class="d mono">11.15<br></div><div class="d mono"><div class="d mono">1、在线更新补丁：联网获取当前装载系统分支级补丁额外添加Microsoft-Windows-LanguageFeatures-Basic-en-us-Package-amd64.cab和Microsoft-Windows-LanguageFeatures-OCR-en-us-Package-amd64.cab；自动下载并自动排序、自动根据QFE匹配基线补丁、自动识别并处理PSF+CAB\WIM(包括热补丁以及1904X的ESU处理)；</div><div class="d mono">2、系统APPS真正自选卸载、并能精确处理因win11主系统限制正常卸载失败的精确处理残留达到和正常卸载完全一致的结果不误杀其它共享依赖的应用；</div><div class="d mono">3、一键更新预置APPX应用、按规范添加的APPX也能智能识别并精准匹配依赖保证同步更新；</div><div class="d mono">4、Edge一键更新并捕获映像应用到装载映像，真正做到更新目的；</div><div class="d mono">5、组件包提取功能更加完整、基本能达到99.9%的完整性、可真实还原官方包；</div><div class="d mono">6、组件特殊处理除了能处理自身操作残留亦能处理其他工具制作映像的残留、相当于在完整组件存储状态做移除操作；</div><div class="d mono">7、针对PSF增量补丁的处理直接使用系统自身解码不再依赖网络上的PSF解码程序，同时转换ESD也不再依赖wimlib-imagex程序；</div><div class="d mono">8、不再依赖7z工具全部使用系统自身解压功能；</div><div class="d mono">9、专门为解决mshta.exe vbscript类命令在win11上的黑窗口问题写了真实进度的现代化窗口；</div><div class="d mono">10、通用优化和个性设置将右键进行归类做伸展二级归纳，尽量不拉长右键菜单高度；</div><div class="d mono">11、为win10系统专门写了任务栏图标居中和透明任务栏程序、自动启动、是否透明自定义；</div><div class="d mono">12、专门为自制映像提供转换、加密（在本地随机生成KEY并自动保存记录SHA256-加密采用官方加密方式不影响安装部署，仅用于不被解压工具解压、在源头杜绝第三方工具破坏）、解密、也可根据原始镜像源制作标准官方ESD结构映像也可制作标准ISO镜像；</div><div class="d mono"><br></div><div class="d mono">2026-11-15_12:32:18 (调整加密逻辑操作)</div><div class="d mono">&nbsp; &nbsp; 使用MS公开的8组解密KEY随机选1个做加密KEY、保证类似dism++这类内置官方解密KEY的工具顺利自动解密</div></div><div class="d mono">11.12</div>
+        <div class="d mono">11.15</div>
         <div class="c">
-          <h3 class="">制作提取组件封包按官方结构完整导出</h3>
-          <p class="">以包族的 mum 为起点，顺着 dependency/dependentAssembly 与 package/update/package 两条引用逐层并入组件清单、子包与载荷；母包里查不到清单身份的引用按组件处理，n\、f\、r 三类备份副本一并收进，宁多不少。导出的 CAB 结构与官方特征包一致，可直接交 DISM 安装。</p>
+          <h3>在线补丁与应用更新增强</h3>
+          <p>联网获取当前系统分支级补丁，自动下载、排序并按基线匹配，识别并处理增量补丁、压缩包与映像组合；预装应用支持真正自选卸载并精确处理受限卸载后的残留，不误杀共享依赖；一键更新预置应用并精准匹配依赖。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.15</div>
+        <div class="c">
+          <h3>组件提取与专项清理更完整</h3>
+          <p>组件包提取按官方结构完整导出；组件特殊处理既能清理自身操作残留，也能处理其它工具制作映像留下的残留，相当于在完整组件存储状态下执行移除。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.15</div>
+        <div class="c">
+          <h3>内置解码与现代化进度窗口</h3>
+          <p>增量补丁解码与映像格式转换均改为内置实现，不再依赖外部解码、转换程序；压缩包处理改用系统自身能力；脚本类命令在新版系统上的黑窗口问题，由带真实进度的现代化窗口替代。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.15</div>
+        <div class="c">
+          <h3>浏览器捕获、任务栏组件与成品封装</h3>
+          <p>浏览器支持一键更新并把当前系统映像捕获回装载映像；为较早版本系统编写任务栏图标居中与透明的独立组件，可自启、透明与否自定义；为自制映像提供转换、加密、解密，也可按原始映像制作标准 ESD 或标准 ISO。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.12</div>
         <div class="c">
-          <h3 class="">补丁解析覆盖 PSF / CAB / WIM 组合</h3>
-          <p class="">WIM 基线先展开，再按包内 cix.xml 打 PSF 差量，最后封装成 ESD；PSF 解码改用内置 msdelta 直连，不再调用外置工具；映像是 x86 还是 x64 由补丁名第三段判定，不符合直接提示。</p>
+          <h3>组件封包按官方结构完整导出</h3>
+          <p>顺着引用关系逐层并入组件清单、子包与载荷，备份副本一并收录，导出的封包结构与官方特征包一致，可直接安装。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.12</div>
         <div class="c">
-          <h3 class="">精简或集成 Edge 增加「捕获当前系统 Edge 映像」</h3>
-          <p class="">安装目录按宿主位数与系统盘自动定位，版本号取真实文件版本，捕获成 Edge.wim，已存在时询问覆盖、追加还是取消；捕获项不要求先装载映像。</p>
+          <h3>补丁解析覆盖增量差量组合</h3>
+          <p>基线映像先展开，再按包内差量文件打补丁，最后封装成 ESD；解码内置完成，不再调用外置工具；映像架构由补丁信息判定，不符合时给出提示。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.12</div>
         <div class="c">
-          <h3 class="">版本特征包成对排除</h3>
-          <p class="">Microsoft-Windows-EnterpriseSEdition 与它的 -Wrapper 同时存在时，才从组件清单里剔除，避免把不相干的中性包一起排掉。</p>
+          <h3>浏览器精简或集成支持捕获当前系统映像</h3>
+          <p>安装目录按宿主位数与系统盘自动定位，版本取真实文件版本，捕获成映像；已存在时询问覆盖、追加或取消，捕获项不要求先装载映像。</p>
+        </div>
+      </div>
+      <div class="rel-row">
+        <div class="d mono">11.12</div>
+        <div class="c">
+          <h3>版本特征包成对排除</h3>
+          <p>对应版本包与其附属包装同时存在时才从组件清单剔除，避免把不相干的中性包一起排掉。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3 class="">针对Win7至Win10 任务栏程序图标居中和透明程序重写了独立运行程序YCTB</h3>
-          <p class="">一个托盘小程序同时管居中与透明，右键四项开关随手切；重启资源管理器、插拔显示器后会自动重新对齐，静息占用维持在 3–4 MB，Win7 SP1 到 Win10 19045 都能用。</p>
+          <h3>任务栏居中与透明独立组件</h3>
+          <p>一个托盘组件同时管理居中与透明，右键开关随手切；重启资源管理器、插拔显示器后自动重新对齐，原生实现、占用低。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3 class="">右键菜单集</h3>
-          <p class="">将部分添加的菜单进行收缩层叠，不再使用全独立菜单按钮。</p>
+          <h3>右键菜单收缩层叠</h3>
+          <p>部分添加的菜单进行收缩层叠，不再使用全独立菜单按钮，避免菜单过长。</p>
         </div>
       </div>
       <div class="rel-row">
         <div class="d mono">11.10</div>
         <div class="c">
-          <h3 class="">不再固定死显示分辨率下做假居中</h3>
-          <p class="">原来按 1600×900 这类固定组合做占位，目前使用独立YCTB来完成智能适应各种分辨率居中，完全C++不依赖额外运行库、轻快运行低占用。</p>
-        </div>
-      </div>
-      <div class="rel-row">
-        <div class="d mono">11.10</div>
-        <div class="c">
-          <h3 class="">所需核心工具内置</h3>
-          <p class="">在用户已有数据发生灾难时，只要程序不被破坏依然随时可用，不会因为缺失工具而导致定制无法进行。</p>
+          <h3>核心能力内置，离线可用</h3>
+          <p>所需核心能力内置在程序中，只要程序不被破坏即可随时使用，不会因为缺失工具而导致定制中断。</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="sec">
-    <div class="sec-head"><h2 class="">系统支持</h2><span class="hint">按功能分别判定，不按主程序一刀切</span></div>
+    <div class="sec-head"><h2>系统支持</h2><span class="hint">按功能分别判定，不按主程序一刀切</span></div>
     <div class="tbl-wrap">
       <table>
         <colgroup><col style="width:34%"><col style="width:30%"><col style="width:36%"></colgroup>
         <thead><tr><th>功能</th><th>适用范围</th><th>说明</th></tr></thead>
         <tbody>
           <tr><td>主程序与映像处理</td><td class="mono">Win10 / Win11</td><td class="note">需 .NET Framework 4.8；32 位系统同样可运行</td></tr>
-          <tr><td>任务栏图标居中</td><td class="mono">build ≤ 19045</td><td class="note">仅对Win7到Win10-19045以下系统部署</td></tr>
-          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">同上</td></tr>
-          <tr><td class="">YCDISM核心所需权限和环境</td><td class="mono">Win7 及以上</td><td class="note">能否完全操作取决于用户当前环境和权限要绝对与微软官方文档ADK一致，以免操作会失败，这不是工具所需特权，特此说明。</td></tr>
+          <tr><td>任务栏图标居中</td><td class="mono">较早版本 Win7 / Win10</td><td class="note">仅部署到对应较早版本系统</td></tr>
+          <tr><td>任务栏透明</td><td class="mono">Win10 / Win11</td><td class="note">按目标系统版本生效</td></tr>
+          <tr><td>核心所需权限与环境</td><td class="mono">Win7 及以上</td><td class="note">能否完全操作取决于当前环境与权限，需满足官方文档要求，这不是工具所需特权。</td></tr>
         </tbody>
       </table>
     </div>
@@ -509,8 +538,8 @@ td.note{color:var(--dim);font-size:13px}
 
   <section class="sec" id="donors">
     <div class="sec-head"><h2>赞助者名单</h2><span class="hint">感谢每一位让这件事继续做下去的人</span></div>
-    <p class="lead" style="font-size:14px;max-width:52em">
-      YCDISM 程序编写、数据整合一直是雨晨独立花费巨量时间、精力及金钱来完成的，毕竟雨晨也是人要生活、除了免费开放的外肯定还是要热心人士、志趣相同以及更多同道者精神、经济、物质上的支持方能走向更远、更开放的未来。</p>
+    <p style="font-size:14px;max-width:52em;margin:0 0 10px">
+      YCDISM 的程序编写、数据整合一直由雨晨独立花费大量时间、精力与金钱完成；除免费开放外，也需要热心人士、志趣相投者在精神、经济与物质上的支持，才能走向更远、更开放的未来。</p>
     <div class="dlist">
       <div class="ditem"><span class="dn">忠信科技电脑</span><span class="dq">15271658851</span></div>
       <div class="ditem"><span class="dn">安盾网络</span><span class="dq">360311423</span></div>
@@ -534,50 +563,52 @@ td.note{color:var(--dim);font-size:13px}
       <div class="ditem"><span class="dn">阿辉</span><span class="dq">376031328</span></div>
     </div>
     <div class="qrcard">
-      <img src="assets/ycdism-qr.png" alt="微信赞赏二维码" width="132" height="131" loading="lazy">
+      <img src="ycdism-qr.png" alt="微信赞赏二维码" width="132" height="131" loading="lazy">
       <div>
-        <h3 class="">如果您认可并想帮助雨晨可随意打赏，雨晨真心表示感谢！！！</h3>
-        <p class="">微信扫码即可，金额随意，完全自愿，不影响任何功能与更新。爱心名单会随时补充。</p>
+        <h3>如果您认可并想帮助雨晨，可随意打赏，雨晨真心表示感谢！</h3>
+        <p>微信扫码即可，金额随意，完全自愿，不影响任何功能与更新。爱心名单会随时补充。</p>
       </div>
     </div>
-    <p class="donor-note">以上名单按昵称排列不会先后和赞助额度。<b>感谢以上朋友的大力支持。</b>
-    </p>
+    <p class="donor-note">以上名单按昵称排列，不分先后与赞助额度。<b>感谢以上朋友的大力支持。</b></p>
   </section>
 
   <section class="sec" id="faq">
     <div class="sec-head"><h2>常见问题</h2></div>
     <div class="faq">
-      <details>
-        <summary>需要管理员权限吗？<i>＋</i></summary>
+      <details open="">
+        <summary class="">需要管理员权限吗？<i>＋</i></summary>
         <p>绝大多数映像操作需要。程序启动会申请提权，成功后日志里只保留一个权限状态标记；权限不足时会有明确提示，并说明相关操作可能失败。</p>
       </details>
-      <details open="" class="">
-        <summary>请至微软官方ADK技术文档做使用前必须满足，非雨晨工具特权。</summary>
+      <details open="">
+        <summary class="">使用前需要满足什么环境？<i>＋</i></summary>
+        <p>使用前请对照官方技术文档确认环境与权限要求，这属于官方规范要求，并非本工具额外索取的特权。</p>
       </details>
-      <details>
-        <summary>会改动当前系统吗？<i>＋</i></summary>
-        <p>映像相关操作都在离线挂载的映像里进行，不改本机。只有明确属于本机的设置项（例如任务栏外观、右键菜单）才会写本机注册表，并保留恢复路径。</p>
+      <details open="">
+        <summary class="">会改动当前系统吗？<i>＋</i></summary>
+        <p>映像相关操作都在离线装载的映像里进行，不改本机。只有明确属于本机的设置项（例如任务栏外观、右键菜单）才会写本机，并保留恢复路径。</p>
       </details>
-      <details>
-        <summary class="">程序不会改写用户当前系统，仅启动时会获取当前系统有限信息以匹配对应的工具，别无其他。<i>＋</i></summary>
-        <p>打包需要知道目标盘的分区与装载分区位置，程序在打包前会搜索可用分区；找不到时不会自行猜测，会提示先装载映像再打包。</p>
+      <details open="">
+        <summary class="">程序会读取本机信息吗？<i>＋</i></summary>
+        <p>程序不会改写用户当前系统，仅在启动时获取有限信息以匹配对应的工具。打包前会搜索可用分区；找不到时不会自行猜测，会提示先装载映像再打包。</p>
       </details>
     </div>
   </section>
 
-  <footer class="foot">
-    <div class="wrap foot-grid">
-      <div>雨晨绿软 · YCDISM 2026 · 仅用于自建系统映像的合法制作</div>
-      <div>
-        <a href="https://github.com/YCDISM2026" rel="noopener">github.com/YCDISM2026</a>
-        &nbsp;·&nbsp;
-        <a href="#" id="copyqq">QQ 371057592</a>
-      </div>
-    </div>
-  </footer>
 </div>
 
-<div class="toast" id="toast">安装包还在打包，开放后这里会变成直链</div>
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>雨晨绿软 · YCDISM 2026 · 仅用于自建系统映像的合法制作</div>
+    <div>
+      <a href="https://ycdism2026.github.io/" rel="noopener">ycdism2026.github.io</a>
+      &nbsp;·&nbsp;
+      <a href="#" id="copyqq">QQ 371057592</a>
+      &nbsp;·&nbsp;Copyright © 2026 雨晨　保留所有权利
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">安装包还在打包，开放后这里会变成下载直链</div>
 
 <script>
 (function () {
@@ -608,17 +639,21 @@ td.note{color:var(--dim);font-size:13px}
 
   var dlBtn = document.getElementById('dl-btn');
   dlBtn.addEventListener('click', function () {
-    showToast('安装包还在打包，开放后这里会变成直链');
+    showToast('安装包还在打包，开放后这里会变成下载直链');
+  });
+
+  var links = document.querySelectorAll('.topacts a[href^="#"]');
+  links.forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var el = document.querySelector(a.getAttribute('href'));
+      if (el) {
+        ev.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
 })();
 </script>
-
-
-
-
-
-
-
 
 
 
