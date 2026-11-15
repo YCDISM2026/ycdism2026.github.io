@@ -430,7 +430,7 @@ td.note{color:var(--dim);font-size:13px}
   </section>
 
   <section class="sec" id="rel">
-    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.12</span></div>
+    <div class="sec-head"><h2 class="">关键更新</h2><span class="hint mono">2026.11.15_12:30:18</span></div>
     <div class="rel">
       <div class="rel-row">
         <div class="d mono">11.15<br></div><div class="d mono"><div class="d mono">1、在线更新补丁：联网获取当前装载系统分支级补丁额外添加Microsoft-Windows-LanguageFeatures-Basic-en-us-Package-amd64.cab和Microsoft-Windows-LanguageFeatures-OCR-en-us-Package-amd64.cab；自动下载并自动排序、自动根据QFE匹配基线补丁、自动识别并处理PSF+CAB\WIM(包括热补丁以及1904X的ESU处理)；</div><div class="d mono">2、系统APPS真正自选卸载、并能精确处理因win11主系统限制正常卸载失败的精确处理残留达到和正常卸载完全一致的结果不误杀其它共享依赖的应用；</div><div class="d mono">3、一键更新预置APPX应用、按规范添加的APPX也能智能识别并精准匹配依赖保证同步更新；</div><div class="d mono">4、Edge一键更新并捕获映像应用到装载映像，真正做到更新目的；</div><div class="d mono">5、组件包提取功能更加完整、基本能达到99.9%的完整性、可真实还原官方包；</div><div class="d mono">6、组件特殊处理除了能处理自身操作残留亦能处理其他工具制作映像的残留、相当于在完整组件存储状态做移除操作；</div><div class="d mono">7、针对PSF增量补丁的处理直接使用系统自身解码不再依赖网络上的PSF解码程序，同时转换ESD也不再依赖wimlib-imagex程序；</div><div class="d mono">8、不再依赖7z工具全部使用系统自身解压功能；</div><div class="d mono">9、专门为解决mshta.exe vbscript类命令在win11上的黑窗口问题写了真实进度的现代化窗口；</div><div class="d mono">10、通用优化和个性设置将右键进行归类做伸展二级归纳，尽量不拉长右键菜单高度；</div><div class="d mono">11、为win10系统专门写了任务栏图标居中和透明任务栏程序、自动启动、是否透明自定义；</div><div class="d mono">12、专门为自制映像提供转换、加密（在本地随机生成KEY并自动保存记录SHA256-加密采用官方加密方式不影响安装部署，仅用于不被解压工具解压、在源头杜绝第三方工具破坏）、解密、也可根据原始镜像源制作标准官方ESD结构映像也可制作标准ISO镜像；</div><div class="d mono"><br></div><div class="d mono">2026-11-15_12:32:18 (调整加密逻辑操作)</div><div class="d mono">&nbsp; &nbsp; 使用MS公开的8组解密KEY随机选1个做加密KEY、保证类似dism++这类内置官方解密KEY的工具顺利自动解密</div></div><div class="d mono">11.12</div>
@@ -612,6 +612,7 @@ td.note{color:var(--dim);font-size:13px}
   });
 })();
 </script>
+
 
 
 
