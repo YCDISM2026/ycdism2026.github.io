@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head>
+<html lang="zh-CN"><head><link id="giscus-css" rel="stylesheet" href="https://giscus.app/default.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YCDISM 2026 — Windows 映像制作程序</title>
@@ -186,6 +186,29 @@ td.note{color:var(--dim);font-size:13px}
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important}
 }
+
+/* 下载区 */
+.dl-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.dl-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.dl-card .dl-k{font-size:11.5px;letter-spacing:.12em;color:var(--dim)}
+.dl-card h3{margin:0;font-size:16px}
+.dl-card p{margin:0;font-size:13.5px;color:var(--dim);flex:1}
+.dl-card .pw{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim)}
+.dl-card .pw b{font-family:Consolas,"Cascadia Mono",ui-monospace,monospace;color:var(--accent);letter-spacing:.08em}
+.pw-copy{font-size:12.5px;color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+.dl-card .btn{margin-top:6px}
+.dl-foot{margin:12px 0 0;font-size:12.5px;color:var(--dim)}
+@media (min-width:720px){
+  .dl-grid{grid-template-columns:1fr 1fr}
+}
+
+/* 留言板 */
+.gb-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.gb-box{min-height:180px;padding:8px}
+.gb-tip{padding:28px 18px;text-align:center;color:var(--dim);font-size:13px;line-height:2}
+.gb-tip b{color:var(--text)}
+.gb-tip a{color:var(--accent)}
+.gb-note{margin:10px 0 0;font-size:12px;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -201,7 +224,9 @@ td.note{color:var(--dim);font-size:13px}
       <a href="#menus">功能菜单</a>
       <a href="#tools">自研工具</a>
       <a href="#rel">本版更新</a>
+      <a href="#dl">下载</a>
       <a href="#donors">赞助名单</a>
+      <a href="#guestbook">留言板</a>
       <a href="#faq">常见问题</a>
     </nav>
   </div>
@@ -226,6 +251,7 @@ td.note{color:var(--dim);font-size:13px}
         <div class="stat"><b class="mono">36 项</b><span>主程序核心功能菜单</span></div>
         <div class="stat"><b class="mono">Win10 / 11</b><span>面向离线映像制作</span></div>
         <div class="stat"><b class="mono">装载 → 处理 → 输出</b><span>一条链路走完定制流程</span></div>
+        <div class="stat"><b class="mono"><span id="busuanzi_value_site_pv">-</span> 次访问 · <span id="busuanzi_value_site_uv">-</span> 位访客</b><span>本站累计统计，数据来自第三方计数</span></div>
       </div>
     </div>
   </section>
@@ -536,6 +562,27 @@ td.note{color:var(--dim);font-size:13px}
     </div>
   </section>
 
+  <section class="sec" id="dl">
+    <div class="sec-head"><h2>下载</h2><span class="hint">绿软下载与系统下载 · 默认直达 123 云盘分享</span></div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <span class="dl-k mono">GREENSOPT · 绿软</span>
+        <h3>绿软下载</h3>
+        <p>雨晨绿软整理的常用工具、运行库与实用小软件合集，装机与维护按需取用。</p>
+        <div class="pw">提取码 <b>YCFS</b><a class="pw-copy" href="#" data-copy="YCFS">复制</a></div>
+        <a class="btn" href="https://www.123912.com/s/ZEbRVv-Brh8?pwd=YCFS#" target="_blank" rel="noopener" data-dl="green">打开下载</a>
+      </div>
+      <div class="dl-card">
+        <span class="dl-k mono">SYSTEM · 系统</span>
+        <h3>系统下载</h3>
+        <p>Windows 10 / 11 系统镜像与雨晨自制系统，下载后请先校验再部署。</p>
+        <div class="pw">提取码 <b>YCFS</b><a class="pw-copy" href="#" data-copy="YCFS">复制</a></div>
+        <a class="btn" href="https://www.123912.com/s/ZEbRVv-Brh8?pwd=YCFS#" target="_blank" rel="noopener" data-dl="system">打开下载</a>
+      </div>
+    </div>
+    <p class="dl-foot">两个入口默认都指向同一个 123 云盘分享，提取码 YCFS；链接失效或需要分流请私聊 QQ 371057592。</p>
+  </section>
+
   <section class="sec" id="donors">
     <div class="sec-head"><h2>赞助者名单</h2><span class="hint">感谢每一位让这件事继续做下去的人</span></div>
     <p style="font-size:14px;max-width:52em;margin:0 0 10px">
@@ -592,6 +639,16 @@ td.note{color:var(--dim);font-size:13px}
         <p>程序不会改写用户当前系统，仅在启动时获取有限信息以匹配对应的工具。打包前会搜索可用分区；找不到时不会自行猜测，会提示先装载映像再打包。</p>
       </details>
     </div>
+  </section>
+
+  <section class="sec" id="guestbook">
+    <div class="sec-head"><h2>留言板</h2><span class="hint">用 GitHub 账号登录后即可留言，内容保存在本仓库的 Discussions</span></div>
+    <div class="gb-wrap">
+      <div class="gb-box" id="giscus-box">
+        <div class="gb-tip">留言板正在接入 GitHub Discussions，开通后这里直接显示评论框。</div>
+      <script src="https://giscus.app/client.js" async="" crossorigin="anonymous" data-repo="YCDISM2026/ycdism2026.github.io" data-repo-id="R_kgDOVpfhkg" data-category="Announcements" data-category-id="DIC_kwDOVpfhkg4DL1QF" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="zh-CN"></script><div class="giscus"><iframe class="giscus-frame" title="Comments" scrolling="no" allow="clipboard-write" src="https://giscus.app/zh-CN/widget?origin=file%3A%2F%2F%2FE%3A%2FYCDISM%2F%25E7%25BC%2596%25E8%25BE%2591%25E5%258F%2591%25E5%25B8%2583%25E5%2599%25A8.html&amp;session=&amp;theme=light&amp;reactionsEnabled=1&amp;emitMetadata=0&amp;inputPosition=top&amp;repo=YCDISM2026%2Fycdism2026.github.io&amp;repoId=R_kgDOVpfhkg&amp;category=Announcements&amp;categoryId=DIC_kwDOVpfhkg4DL1QF&amp;strict=0&amp;description=YCDISM+2026+%E6%98%AF%E9%9D%A2%E5%90%91+Windows+10%2F11+%E7%9A%84%E6%98%A0%E5%83%8F%E8%A3%85%E8%BD%BD%E3%80%81%E5%AE%9A%E5%88%B6%E3%80%81%E7%B2%BE%E7%AE%80%E4%B8%8E%E4%BC%98%E5%8C%96%E5%88%B6%E4%BD%9C%E7%A8%8B%E5%BA%8F%EF%BC%8C%E6%8C%89%E8%8F%9C%E5%8D%95%E6%B5%81%E7%A8%8B%E5%AE%8C%E6%88%90%E7%A6%BB%E7%BA%BF%E6%98%A0%E5%83%8F%E5%AE%9A%E5%88%B6%E4%B8%8E%E6%88%90%E5%93%81%E8%BE%93%E5%87%BA%E3%80%82&amp;backLink=file%3A%2F%2F%2FE%3A%2FYCDISM%2F%25E7%25BC%2596%25E8%25BE%2591%25E5%258F%2591%25E5%25B8%2583%25E5%2599%25A8.html&amp;term=E%3A%2FYCDISM%2F%25E7%25BC%2596%25E8%25BE%2591%25E5%258F%2591%25E5%25B8%2583%25E5%2599%25A8" style=""></iframe></div></div>
+    </div>
+    <p class="gb-note">留言会公开显示在 GitHub Discussions 中，请不要填写手机号、邮箱等隐私信息；与主题无关或广告内容会被清理。</p>
   </section>
 
 </div>
@@ -652,12 +709,75 @@ td.note{color:var(--dim);font-size:13px}
       }
     });
   });
+
+  /* ===== 下载链接：只改这一处，两个下载按钮同步生效 ===== */
+  var DOWNLOADS = {
+    green: 'https://www.123912.com/s/ZEbRVv-Brh8?pwd=YCFS#',
+    system: 'https://www.123912.com/s/ZEbRVv-Brh8?pwd=YCFS#'
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('[data-dl]'), function (el) {
+    var url = DOWNLOADS[el.getAttribute('data-dl')];
+    if (url) el.setAttribute('href', url);
+  });
+
+  /* ===== 提取码复制 ===== */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var text = el.getAttribute('data-copy') || '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          showToast('已复制提取码 ' + text);
+        }).catch(function () {
+          showToast('提取码：' + text);
+        });
+      } else {
+        showToast('提取码：' + text);
+      }
+    });
+  });
+
+  /* ===== 留言板：giscus，数据存 GitHub Discussions ===== */
+  var GISCUS = {
+    repo: 'YCDISM2026/ycdism2026.github.io',
+    repoId: 'R_kgDOVpfhkg',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOVpfhkg4DL1QF',   /* Announcements 分类，来自 giscus.app 配置页 */
+    mapping: 'pathname'
+  };
+
+  (function mountGiscus() {
+    var box = document.getElementById('giscus-box');
+    if (!box) return;
+    if (!GISCUS.categoryId) {
+      box.innerHTML = '<div class="gb-tip">留言板正在接入 GitHub Discussions，开通后这里直接显示评论框。</div>';
+      return;
+    }
+    var s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    s.setAttribute('data-repo', GISCUS.repo);
+    s.setAttribute('data-repo-id', GISCUS.repoId);
+    s.setAttribute('data-category', GISCUS.category);
+    s.setAttribute('data-category-id', GISCUS.categoryId);
+    s.setAttribute('data-mapping', GISCUS.mapping);
+    s.setAttribute('data-strict', '0');
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-input-position', 'top');
+    s.setAttribute('data-theme', 'light');
+    s.setAttribute('data-lang', 'zh-CN');
+    box.appendChild(s);
+  })();
 })();
 </script>
 
 
 
 
+
+<script async="" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 </body></html>
